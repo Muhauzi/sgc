@@ -3,24 +3,19 @@
 <?= $this->section('content'); ?>
 
 <div class="container position-absolute top-50 start-50 translate-middle">
-
     <!-- Outer Row -->
     <div class="row justify-content-center">
-
         <div class="col-md-6">
-
             <div class="card overflow-hidden border-0 shadow-lg">
                 <div class="card-body p-0">
-
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg">
                             <div class="p-4">
                                 <div class="text-center">
                                     <h1 class="title text-gray-900 fw-bold mb-3">SGCommunity</h1>
-
                                     <h1 class="subtitle text-gray-900 fw-light">Welcome!</h1>
-                                    <img src="<?= base_url('../img/logoSGC.png') ?>" alt="Logo SGC" class="logo">
+                                    <img src="<?= base_url('../img/logoSGC[2].png') ?>" alt="Logo SGC" class="logo">
                                 </div>
                                 <form class="user" action="<?= url_to('login') ?>" method="post">
                                     <?= csrf_field() ?>
@@ -58,8 +53,9 @@
                                     <div class="input-group border-0 mb-3">
                                         <span class="input-group-text border-0" id="icon"><i
                                                 class="fa-solid fa-lock"></i></span>
-                                        <input type="password" name="password"
+                                        <input type="password" name="password" id="password"
                                             class="form-control border-0 form-control-user" placeholder="<?= lang('Auth.password') ?>">
+                                            <span class="input-group-text border-0" id="icon" onclick="togglePassword()"><i class="fa-solid fa-eye-slash" id="eyes"></i></span>
                                         <div class="invalid-feedback">
                                             <?= session('errors.password') ?>
                                         </div>
