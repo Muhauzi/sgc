@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Models\UserModel;
 use CodeIgniter\Files\File;
+use App\Models\TokoModel;
 
 class Admin extends BaseController
 {
@@ -198,5 +199,57 @@ class Admin extends BaseController
         } else {
             return redirect()->to('/admin')->with('error', 'User not found');
         }
+    }
+
+
+    //Admin Toko Section
+
+    public function toko()
+    {
+        $tokoModel = new TokoModel();
+        // $toko = $tokoModel->findAll();
+        $tokos = $tokoModel->getTokoWithFullname();
+
+        $data = [
+            'title' => 'Toko | SGCommunity',
+            // 'toko' => $toko,
+            'tokos' => $tokos
+        ];
+
+        return view('admins/toko/index', $data);
+    }
+
+    public function tambahkan_toko()
+    {
+        $usersm = new UserModel();
+        $users = $usersm->findAll(); 
+        $data = [
+            'title' => 'Tambahkan Toko | SGCommunity',
+            'users' => $users
+        ];
+        return view('admins/toko/tambah', $data);
+    }
+
+    public function tambah_toko()
+    {
+        $tokoModel = new TokoModel();
+
+        // Get the input data from the form
+        $namaToko = $this->request->getVar('nama_toko');
+        $alamatToko = $this->request->getVar('alamat_toko');
+        $teleponToko = $this->request->getVar('telepon_toko');
+        $idUser = $this->request->getVar('idPemilik'); // Add this line to get the id_user from the form
+
+        // Create a new toko record
+        $tokoData = [
+            'nama_toko' => $namaToko,
+            'alamat_toko' => $alamatToko,
+            'nohp_toko' => $teleponToko,
+            'id_user' => $idUser // Add id_user to the tokoData array
+        ];
+        $tokoModel->insert($tokoData);
+
+        session()->setFlashdata('success', 'Toko berhasil ditambahkan');
+        return redirect()->to('/admin/toko');
     }
 }

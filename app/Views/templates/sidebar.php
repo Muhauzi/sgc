@@ -21,6 +21,11 @@
                     <i class="fas fa-users"></i>
                     <span>Menu Users</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('admin/toko') ;?>">
+                    <i class="fas fa-users"></i>
+                    <span>Menu Toko</span></a>
+                </li>
                 <hr class="sidebar-divider">
             <?php endif; ?>
                 
