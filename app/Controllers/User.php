@@ -7,6 +7,11 @@ use CodeIgniter\Shield\Models\UserModel;
 
 class User extends BaseController
 {
+    public function __construct()
+    {
+        
+        
+    }
     public function index()
     {
         // Get all users from the database
@@ -21,4 +26,25 @@ class User extends BaseController
         ];
         return view('users/index', $data);
     }
+
+    public function profile()
+    {
+        $user = auth()->user();
+        $data = [
+            'title' => 'Profile | SGCommunity',
+            'user' => $user
+        ];
+        return view('users/profile', $data);
+    }
+
+    public function editProfile()
+    {
+        $user = auth()->user();
+        $data = [
+            'title' => 'Edit Profile | SGCommunity',
+            'user' => $user
+        ];
+        return view('users/edit_profile', $data);
+    }
 }
+

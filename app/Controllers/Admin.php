@@ -130,41 +130,6 @@ class Admin extends BaseController
         }
     }
 
-    // public function perbarui()
-    // {
-    //     $id = $this->request->getVar('id');
-    //     $username = $this->request->getVar('username');
-    //     $fullname = $this->request->getVar('fullname');
-    //     $email = $this->request->getVar('email');
-    //     $password = password_hash($this->request->getVar('password'), PASSWORD_BCRYPT);
-    //     $users = auth()->getProvider();
-
-    //     $user = $users->findById($id);
-
-    //     // Handle the file upload
-
-    //     $file = $this->request->getFile('user_image');
-    //     d($file);
-    //     if ($file->isValid() && !$file->hasMoved()) {
-    //         $file->move('./uploads', $id);
-    //         $image_profile = '/uploads/' . $id;
-    //     } else {
-    //         $image_profile = $user->user_image; // keep the old image if no new image is uploaded
-    //     }
-
-    //     $user->fill([
-    //         'username' => $username,
-    //         'fullname' => $fullname,
-    //         'email' => $email,
-    //         'user_image' => $image_profile,
-    //         'password' => $password
-    //     ]);
-
-    //     $users->save($user);
-    //     session()->setFlashdata('success', 'Data Berhasil Diubah');
-    //     return redirect()->to('/admin');
-    // }
-
     public function perbarui()
     {
         $id = $this->request->getVar('id');
@@ -176,38 +141,43 @@ class Admin extends BaseController
 
         $user = $users->findById($id);
 
-        // Handle file upload
-        $image_profile = null;
+        // Handle file upload only if a file is present
         $file = $this->request->getFile('user_image');
-        if ($file !== null) {
-            // Validate file extension and size
+        if (!$file->hasMoved()) {
+            // Validate file extension and size (uncomment for validation)
             if (!$file->isValid()) {
                 session()->setFlashdata('error', 'Invalid file format or size.');
                 return redirect()->to('/admin');
             }
 
-            // Generate a unique filename for the uploaded image
+            // Generate a unique filename and move the uploaded file
             $filename = uniqid('user-') . '.' . $file->getClientExtension();
-
-            // Move the uploaded file to the designated directory
             $file->move('./img/profile', $filename);
 
-            // Update the image_profile variable with the new filename
-            $image_profile = $filename;
+            // Update user data with the new image filename
+            $user->fill([
+                'username' => $username,
+                'fullname' => $fullname,
+                'email' => $email,
+                'user_image' => $filename,
+                'password' => $password
+            ]);
+        } else {
+            // If no file is uploaded, only update other fields
+            $user->fill([
+                'username' => $username,
+                'fullname' => $fullname,
+                'email' => $email,
+                'password' => $password
+            ]);
         }
 
-        $user->fill([
-            'username' => $username,
-            'fullname' => $fullname,
-            'email' => $email,
-            'user_image' => $image_profile,
-            'password' => $password
-        ]);
-
         $users->save($user);
+
         session()->setFlashdata('success', 'Data Berhasil Diubah');
         return redirect()->to('/admin');
     }
+
 
 
     public function upload()

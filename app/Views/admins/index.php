@@ -1,13 +1,11 @@
 <?= $this->extend('templates/index'); ?>
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid col-md-8 text-center mx-auto">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">User Table</h1>
     <a class="btn btn-primary mb-3" href="/Admin/create">Daftarkan Pengguna</a>
-    <div class="row">
-        <div class="col-md-8">
             <table class="table">
                 <thead>
                     <tr>

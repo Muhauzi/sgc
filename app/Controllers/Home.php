@@ -8,8 +8,8 @@ class Home extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Home | SGCommunity'
+            'title' => 'Login | SGCommunity'
         ];
-        return view('users/index', $data);
+        return view('admins/login', $data);
     }
 }

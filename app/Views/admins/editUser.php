@@ -32,6 +32,10 @@
                                             value="<?= $user->email; ?>">
                                     </div>
                                     <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            value="<?= $user->password; ?>">
+                                    <div class="mb-3">
                                         <label for="group" class="form-label">Group</label>
                                         <select class="form-control" id="group" name="group_id">
                                             <option value="superadmin" <?= ($info->group == 'superadmin') ? 'selected' : ''; ?>>Admin</option>
@@ -45,7 +49,7 @@
                                     <div class="mb-3">
                                         <label for="user_image" class="form-label">User Image</label>
                                         <input type="file" class="form-control" id="user_image" name="user_image"
-                                            accept=".jpg, .png, .jpeg, .svg">
+                                            accept=".jpg, .png, .jpeg, .svg" >
                                     </div>
                                     <button class="btn btn-success" type="submit">Update</button> |
                                     <a class="btn btn-info" href="<?= base_url('admin/show/' . $user->id); ?>">Kembali</a>

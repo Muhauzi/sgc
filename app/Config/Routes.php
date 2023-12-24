@@ -20,18 +20,18 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-service('auth')->routes($routes);
+ service('auth')->routes($routes);
 
 $routes->get('/', 'User::index');
-// $routes->get('login', 'Api\AuthController::index');
-$routes->get('user/dashboard', 'Admin::index'); // New route
-$routes->get('admin', 'Admin::index'); // New route
-$routes->get('admin/show/(:num)', 'Admin::show/$1'); // New route for 'get: admin/(:any)'
-// $routes->post('login/auth', 'Api\AuthController::login'); // New login/auth route
-$routes->delete('admin/delete/(:num)', 'Admin::delete/$1'); // New route for 'delete: admin/(:any)'
-// $routes->get('logout', 'Api\AuthController::userLogout'); // New logout route
-$routes->post('admin/update/', 'Admin::perbarui'); // New route for 'update: admin/(:any)'
+$routes->get('user/dashboard', 'Admin::index'); 
+$routes->get('admin', 'Admin::index'); 
+$routes->get('admin/show/(:num)', 'Admin::show/$1'); 
+$routes->delete('admin/delete/(:num)', 'Admin::delete/$1');
+$routes->post('admin/update/', 'Admin::perbarui');
 
+$routes->group('{locale}', static function($routes) {
+    service('auth')->routes($routes);
+});
 
 
 // if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
