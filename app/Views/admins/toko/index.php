@@ -4,7 +4,7 @@
 <div class="container-fluid col-md-8 text-center mx-auto">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">User Table</h1>
+    <h1 class="h3 mb-4 text-gray-800">Toko Table</h1>
     <a class="btn btn-primary mb-3" href="/Admin/tambahkan_toko">Daftarkan Toko</a>
             <table class="table">
                 <thead>
