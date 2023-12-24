@@ -18,8 +18,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap" rel="stylesheet">
-    
-    <link href="<?= base_url();?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/css/sb-admin-2.min.css" rel="stylesheet">
@@ -28,54 +30,48 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand sticky-top topbar pl-4 py-5 static-top">
 
-        <!-- Sidebar Toggle (Topbar) -->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-        </button>
+<header class="navbar navbar-expand sticky-top topbar pl-4 py-5">
+    <div class="logo">
+        <a href="<?= base_url(); ?>/admin">
+            <img src="<?= base_url(); ?>/img/logoSGC[2].png" alt="Logo SGC" class="logo" width="90%" height="70%">
+        </a>
+    </div> <!-- /.logo -->
 
-        <div class="logo">
-            <a href="<?= base_url(); ?>/admin">
-                <img src="<?= base_url(); ?>/img/logoSGC[2].png" alt="Logo SGC" class="logo" width="90%" height="70%">
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle show" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>">
+                <span class="ml-3 d-none d-lg-inline text-white">
+                    Halo, <?= auth()->user()->username; ?>!
+                </span>
             </a>
-        </div>
 
-        <!-- Topbar Navbar -->
-        <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>">
-                    <span class="ml-3 d-none d-lg-inline text-white">
-                        Halo, <?= auth()->user()->username; ?>!
-                    </span>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="<?= base_url('admin'); ?>">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
                 </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="<?= base_url('admin'); ?>">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                    </a>
-                    <?php if ($user->inGroup('superadmin', 'admin')): ?>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?= base_url('admin'); ?>">
-                            <i class="fa-solid fa-gauge fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Dashboard Admin
-                        </a>
-                    <?php endif; ?>
+                <?php if ($user->inGroup('superadmin', 'admin')): ?>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
+                    <a class="dropdown-item" href="<?= base_url('admin'); ?>">
+                        <i class="fa-solid fa-gauge fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Dashboard Admin
                     </a>
-                </div>
-            </li>
-            </div>
-            </li>
-        </ul>
-    </nav>
+                <?php endif; ?>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div> <!-- /.dropdown-menu -->
+        </li>
+    </ul>
+</header>
 
     <?= $this->renderSection('content'); ?>
 
@@ -103,17 +99,15 @@
         </div>
     </div>
 
-    <footer>
-        <!-- Bootstrap core JavaScript-->
-        <script src="<?= base_url(); ?>/vendor/jquery/jquery.min.js"></script>
-        <script src="<?= base_url(); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="<?= base_url(); ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/07df810a55.js" crossorigin="anonymous"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script>
-    </footer>
+    <!-- Custom scripts for all pages-->
+    <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script>
 </body>
 
 </html>

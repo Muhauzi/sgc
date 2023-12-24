@@ -3,6 +3,10 @@
     --color-green: #84C035;
 }
 
+.text-green {
+    color: var(--color-green);
+}
+
  /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -27,12 +31,12 @@ html {
     overflow: hidden;
 }
 
-nav {
+header {
     background-color: var(--color-nav);
     overflow: hidden;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: ;
 }
 
 .nav-item {
@@ -42,9 +46,16 @@ nav {
     padding: 0.5rem 1rem;
 }
 
+.navbar-nav .nav-item .dropdown-menu {
+    background-color: var(--color-green);
+    border: none;
+    z-index: 9999 !important;
+}
+
 .sidebar {
     border-right: var(--color-green) 2px solid;
     min-width: 380px;
+    padding-right: 0 !important;
 }
 
 .list-header {
@@ -89,4 +100,9 @@ nav {
 .list-group {
     max-height: calc(100vh - 160px);
     overflow-y: auto;
+}
+
+.content {
+    min-height: calc(100vh - 100px);
+    z-index: -1;
 }
