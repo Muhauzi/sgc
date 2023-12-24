@@ -51,23 +51,43 @@
             </a>
 
             <!-- Dropdown - User Information -->
-            <div class="dropdown-menu shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<?= base_url('admin'); ?>">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
-                </a>
+            <div class="dropdown-menu bg-night animated--grow-in py-0" aria-labelledby="userDropdown">
+
+                <div class="container-fluid text-center text-white">
+                    <div class="row justify-content-center">
+                        <img src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>" class="img-user img-profile rounded-circle my-3">
+                        <p><?= auth()->user()->username; ?></p>
+                        <p><?= auth()->user()->inGroup('superadmin', 'admin') ? 'Admin' : 'Customer'; ?></p>
+                    </div>
+                </div>
+
+                <div class="dropdown-item bg-fff-20">
+                    <span class="fw-bold text-white">
+                        <i class="fa-solid fa-cart-shopping mr-3"></i>
+                        Keranjang
+                    </span>
+                </div>
                 <?php if ($user->inGroup('superadmin', 'admin')): ?>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<?= base_url('admin'); ?>">
-                        <i class="fa-solid fa-gauge fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Dashboard Admin
-                    </a>
+                <div class="dropdown-item bg-fff-20">
+                    <span class="fw-bold text-white">
+                        <i class="fa-solid fa-list-check mr-3"></i>
+                        Pesanan
+                    </span>
+                </div>
                 <?php endif; ?>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
-                </a>
+                <div class="action-btn dropdown-item bg-white p-0 py-1 d-flex justify-content-between">
+                    <span class="text-white ml-2">
+                        <a href="<?= base_url('admin'); ?>" class="btn btn-sm bg-night text-white py-0" role="button">
+                            Dashboard
+                        </a>
+                    </span>
+                    
+                    <span class="text-white mr-2">
+                        <a class="btn btn-sm bg-night text-white py-0" href="" role="button" data-toggle="modal" data-target="#logoutModal">
+                            Sign Out
+                        </a>
+                    </span>
+                </div>
             </div> <!-- /.dropdown-menu -->
         </li>
     </ul>

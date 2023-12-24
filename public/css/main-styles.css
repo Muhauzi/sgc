@@ -1,6 +1,25 @@
 :root {
     --color-nav: #2B3A46;
+    --color-nav-80: rgba(43, 58, 70, 0.8);
     --color-green: #84C035;
+    --color-fff-20: rgba(255, 255, 255, 0.2);
+    --color-fff-10: rgba(255, 255, 255, 0.1);
+}
+
+.bg-night {
+    background-color: var(--color-nav);
+}
+
+.bg-green {
+    background-color: var(--color-green);
+}
+
+.bg-fff-20 {
+    background-color: var(--color-fff-20);
+}
+
+.bg-fff-20:hover {
+    background-color: var(--color-fff-10);
 }
 
 .text-green {
@@ -36,7 +55,10 @@ header {
     overflow: hidden;
     top: 0;
     width: 100%;
-    z-index: ;
+}
+
+.topbar {
+    overflow: visible;
 }
 
 .nav-item {
@@ -46,10 +68,19 @@ header {
     padding: 0.5rem 1rem;
 }
 
-.navbar-nav .nav-item .dropdown-menu {
-    background-color: var(--color-green);
-    border: none;
-    z-index: 9999 !important;
+.img-user {
+    width: 45%;
+    height: auto;
+}
+
+.action-btn {
+    border: var(--color-nav-80) 2px solid;
+}
+
+.action-btn a:hover, 
+.action-btn a:focus, 
+.action-btn a:active { 
+    background-color: var(--color-nav-80) !important;
 }
 
 .sidebar {
