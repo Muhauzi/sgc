@@ -136,44 +136,39 @@ class Admin extends BaseController
         $username = $this->request->getVar('username');
         $fullname = $this->request->getVar('fullname');
         $email = $this->request->getVar('email');
-        $password = password_hash($this->request->getVar('password'), PASSWORD_BCRYPT);
+        $role = $this->request->getVar('role');
         $users = auth()->getProvider();
 
         $user = $users->findById($id);
 
-        // Handle file upload only if a file is present
+        // Handle the file upload
         $file = $this->request->getFile('user_image');
-        if (!$file->hasMoved()) {
-            // Validate file extension and size (uncomment for validation)
-            if (!$file->isValid()) {
-                session()->setFlashdata('error', 'Invalid file format or size.');
-                return redirect()->to('/admin');
-            }
-
-            // Generate a unique filename and move the uploaded file
-            $filename = uniqid('user-') . '.' . $file->getClientExtension();
-            $file->move('./img/profile', $filename);
-
-            // Update user data with the new image filename
-            $user->fill([
-                'username' => $username,
-                'fullname' => $fullname,
-                'email' => $email,
-                'user_image' => $filename,
-                'password' => $password
-            ]);
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move('./public/img/profile', $newName);
+            $user_image = '/img/profile/' . $newName;
         } else {
-            // If no file is uploaded, only update other fields
-            $user->fill([
-                'username' => $username,
-                'fullname' => $fullname,
-                'email' => $email,
-                'password' => $password
-            ]);
+            $user_image = $user->user_image; // keep the old image if no new image is uploaded
         }
 
-        $users->save($user);
+        // If password is provided, hash it
+        $password = $this->request->getVar('password');
+        if ($password !== null) {
+            $user->setPassword($password);
+        } else {
+            $password = $user->password; // keep the old password if no new password is provided
+        }
 
+        $user->fill([
+            'username' => $username,
+            'fullname' => $fullname,
+            'email' => $email,
+            'user_image' => $user_image,
+            'password' => $password,
+            'role' => $role
+        ]);
+
+        $users->save($user);
         session()->setFlashdata('success', 'Data Berhasil Diubah');
         return redirect()->to('/admin');
     }
