@@ -22,11 +22,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap" rel="stylesheet">
-    
-    <link href="<?= base_url();?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template-->
-    <!-- <link href="<?= base_url();?>/css/sb-admin-2.min.css" rel="stylesheet"> -->
 
 </head>
 
@@ -53,17 +48,18 @@
         }
     </script>
 
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/07df810a55.js" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap -->
+    <!-- Bootstrap core JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?= base_url();?>/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/07df810a55.js" crossorigin="anonymous"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?= base_url();?>/js/sb-admin-2.min.js"></script>
+    <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script>
 
 </body>
 

@@ -1,6 +1,29 @@
 :root {
     --color-nav: #2B3A46;
+    --color-nav-80: rgba(43, 58, 70, 0.8);
     --color-green: #84C035;
+    --color-fff-20: rgba(255, 255, 255, 0.2);
+    --color-fff-10: rgba(255, 255, 255, 0.1);
+}
+
+.bg-night {
+    background-color: var(--color-nav);
+}
+
+.bg-green {
+    background-color: var(--color-green);
+}
+
+.bg-fff-20 {
+    background-color: var(--color-fff-20);
+}
+
+.bg-fff-20:hover {
+    background-color: var(--color-fff-10);
+}
+
+.text-green {
+    color: var(--color-green);
 }
 
  /* width */
@@ -27,12 +50,15 @@ html {
     overflow: hidden;
 }
 
-nav {
+header {
     background-color: var(--color-nav);
     overflow: hidden;
     top: 0;
     width: 100%;
-    z-index: 1;
+}
+
+.topbar {
+    overflow: visible;
 }
 
 .nav-item {
@@ -42,9 +68,25 @@ nav {
     padding: 0.5rem 1rem;
 }
 
+.img-user {
+    width: 45%;
+    height: auto;
+}
+
+.action-btn {
+    border: var(--color-nav-80) 2px solid;
+}
+
+.action-btn a:hover, 
+.action-btn a:focus, 
+.action-btn a:active { 
+    background-color: var(--color-nav-80) !important;
+}
+
 .sidebar {
     border-right: var(--color-green) 2px solid;
     min-width: 380px;
+    padding-right: 0 !important;
 }
 
 .list-header {
@@ -89,4 +131,9 @@ nav {
 .list-group {
     max-height: calc(100vh - 160px);
     overflow-y: auto;
+}
+
+.content {
+    min-height: calc(100vh - 100px);
+    z-index: -1;
 }
