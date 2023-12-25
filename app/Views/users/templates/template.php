@@ -77,13 +77,13 @@
                 <?php endif; ?>
                 <div class="action-btn dropdown-item bg-white p-0 py-1 d-flex justify-content-between">
                     <span class="text-white ml-2">
-                        <a href="<?= base_url('admin'); ?>" class="btn btn-sm bg-night text-white py-0" role="button">
+                        <a href="<?= base_url('dashboard'); ?>" class="btn btn-sm bg-night text-white py-0" role="button">
                             Dashboard
                         </a>
                     </span>
                     
                     <span class="text-white mr-2">
-                        <a class="btn btn-sm bg-night text-white py-0" href="" role="button" data-toggle="modal" data-target="#logoutModal">
+                        <a class="btn btn-sm bg-night text-white py-0" href="/logout" role="button" data-toggle="modal" data-target="#logoutModal">
                             Sign Out
                         </a>
                     </span>

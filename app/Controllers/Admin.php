@@ -21,6 +21,9 @@ class Admin extends BaseController
 
     public function index()
     {
+        if (! auth()->user()->can('admin.access')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         // Get all users from the database
         $users = new UserModel();
         $user = auth()->user();
@@ -39,6 +42,9 @@ class Admin extends BaseController
 
     public function create()
     {
+        if (! auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $data = [
             'title' => 'Register | SGCommunity'
         ];
@@ -49,6 +55,9 @@ class Admin extends BaseController
 
     public function store()
     {
+        if (! auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $users = auth()->getProvider();
         $username = $this->request->getVar('username');
         $email = $this->request->getVar('email');
@@ -89,6 +98,9 @@ class Admin extends BaseController
 
     public function show($id)
     {
+        if (! auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $users = new UserModel();
         $user = $users->find($id);
 
@@ -115,6 +127,9 @@ class Admin extends BaseController
 
     public function edit($id)
     {
+        if (! auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $users = new UserModel();
         $user = $users->find($id);
         $info = auth()->user();
@@ -133,6 +148,9 @@ class Admin extends BaseController
 
     public function perbarui()
     {
+        if (! auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $id = $this->request->getVar('id');
         $username = $this->request->getVar('username');
         $fullname = $this->request->getVar('fullname');
@@ -174,22 +192,11 @@ class Admin extends BaseController
         return redirect()->to('/admin');
     }
 
-
-
-    public function upload()
-    {
-        $img = $this->request->getFile('img');
-        d($img);
-        if (!$img->hasMoved()) {
-            $filepath = WRITEPATH . 'uploads/' . $img->store();
-
-            $data = ['uploaded_fileinfo' => new File($filepath)];
-            return redirect()->to('/admin')->with('success', 'User updated successfully', $data);
-        }
-    }
-
     public function delete($id)
     {
+        if (! auth()->user()->can('users.delete')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $users = new UserModel();
         $user = $users->find($id);
 
@@ -206,6 +213,9 @@ class Admin extends BaseController
 
     public function toko()
     {
+        if (! auth()->user()->can('admin.access')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $tokoModel = new TokoModel();
         // $toko = $tokoModel->findAll();
         $tokos = $tokoModel->getTokoWithFullname();
@@ -221,6 +231,9 @@ class Admin extends BaseController
 
     public function tambahkan_toko()
     {
+        if (! auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $usersm = new UserModel();
         $users = $usersm->findAll(); 
         $data = [
@@ -232,6 +245,9 @@ class Admin extends BaseController
 
     public function tambah_toko()
     {
+        if (! auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
         $tokoModel = new TokoModel();
 
         // Get the input data from the form

@@ -70,7 +70,35 @@
             </div>
         </div>
     </div>
+    <?php if (session('success')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!!!',
+                        text: '<?= session('success') ?>'
+                    });
+                </script>
+            <?php endif; ?>
 
+            <?php if (session('error')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!!!',
+                        text: '<?= session('error') ?>'
+                    });
+                </script>
+            <?php endif; ?>
+
+            <?php if (session('warning')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Warning!!!',
+                        text: '<?= session('warning') ?>'
+                    });
+                </script>
+            <?php endif; ?>
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
