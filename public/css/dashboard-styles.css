@@ -1,0 +1,58 @@
+:root {
+    --nav-color: #2B3A46;
+    --nav-color-80: rgba(43, 58, 70, 0.8);
+    --green-unique: #84C035;
+    --color-fff-20: rgba(255, 255, 255, 0.2);
+    --color-fff-10: rgba(255, 255, 255, 0.1);
+}
+
+.bg-night {
+    background-color: var(--nav-color);
+}
+
+.bg-green {
+    background-color: var(--green-unique);
+}
+
+.bg-fff-20 {
+    background-color: var(--color-fff-20);
+}
+
+.bg-fff-20:hover {
+    background-color: var(--color-fff-10);
+}
+
+.text-green {
+    color: var(--green-unique);
+}
+
+html {
+    overflow-x: hidden;
+    font-family: "Poppins", sans-serif;
+}
+
+.topbar-item {
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.img-user {
+    width: 45%;
+    height: auto;
+}
+
+.action-btn {
+    border: var(--nav-color-80) 2px solid;
+}
+
+.action-btn a:hover, 
+.action-btn a:focus, 
+.action-btn a:active { 
+    background-color: var(--nav-color-80) !important;
+}
+
+.form-control {
+    width: 150%;
+}
