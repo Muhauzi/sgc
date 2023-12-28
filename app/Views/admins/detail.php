@@ -3,12 +3,12 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col d-flex justify-content-center">
             <div class="card mb-3" style="max-width: 940px;">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="<?= base_url('/img/profile/' . $user->user_image); ?>"
-                            class="img-fluid img-profile rounded-circle m-md-3 " alt="<?= $user->username; ?>">
+                            class="img-fluid img-profile rounded-circle m-3" alt="<?= $user->username; ?>">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body my-md-3">
@@ -43,8 +43,10 @@
                                         </span></td>
                                 </tr>
                             </table>
-                            <a href="<?= base_url('/admin'); ?>" class="btn btn-primary">Back</a> | 
-                                <a class="btn btn-info" href="<?= base_url('admin/edit/' . $user->id); ?>">Edit</a>
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-info mr-2" href="<?= base_url('admin/edit/' . $user->id); ?>">Edit</a>
+                                <a href="<?= base_url('/admin'); ?>" class="btn btn-primary ml-2">Back</a>
+                            </div>
                         </div>
                     </div>
                 </div>
