@@ -6,10 +6,9 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Tambah Toko</h1>
     <div class="row">
-        <div class="col-md-8">
-            <form class="user" action="/Admin/tambah_toko" method="post">
+        <div class="col-md-6">
+            <form class="user" action="/admin/tambah_toko" method="post">
                 <?= csrf_field() ?>
-
                 <div class="form-group">
                     <input type="text" class="form-control form-control-user" name="nama_toko">
                 </div>
@@ -18,7 +17,8 @@
                 </div>
                 <div class="form-group">
                     <label for="owner">Owner</label>
-                    <select name="idPemilik" id="owner" class="form-select form-control-user">
+                    <select name="idPemilik" id="owner"
+                        class="form-control form-select form-select-transition form-control-user">
                         <?php foreach ($users as $user): ?>
                             <option value="<?= $user->id; ?>">
                                 <?= $user->fullname; ?>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nohp">Nomor Telepon Toko</label>
-                    <input type="number" class="form-control form-control-user" name="nohp_toko">
+                    <input type="number" class="form-control form-control-user" name="telepon_toko">
                 </div>
 
 

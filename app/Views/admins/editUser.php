@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col d-flex justify-content-center">
             <div class="card mb-3">
-            <h1 class="ml-4 mt-4" >Edit User</h1>
-                    <hr>
+                <h1 class="ml-4 mt-4">Edit User</h1>
+                <hr>
                 <div class="row g-0">
 
                     <div class="col-4 p-5">
@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-8">
                         <div class="d-flex px-5">
-                            <form action="/admin/update" method="post" enctype="multipart/form-data">
+                            <form action="/admin/perbarui" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="<?= $user->id ?>">
 
                                 <label for="username" class="form-label">Username</label>
@@ -36,8 +36,8 @@
                                 <label for="role">Role</label>
                                 <select class="form-control" id="role" name="role">
                                     <!-- Replace 'admin', 'user' with your actual roles -->
-                                    <option value="admin" <?= $user->role == 'admin' ? 'selected' : '' ?>>Admin
-                                    </option>
+                                    <option value="admin" <?= $user->role == 'admin' ? 'selected' : '' ?>>Admin</option>
+                                    <option value="admin" <?= $user->role == 'pedagang' ? 'selected' : '' ?>>Pedagang</option>
                                     <option value="user" <?= $user->role == 'user' ? 'selected' : '' ?>>User</option>
                                 </select>
 
@@ -46,7 +46,8 @@
 
                                 <div class="d-flex justify-content-end">
                                     <input class="btn btn-success my-4 mx-2" type="submit" value="Update User">
-                                    <a href="<?= base_url('/admin/show/' . $user->id) ?>" class="btn btn-primary my-4 mx-2">Back</a>
+                                    <a href="<?= base_url('/admin/show/' . $user->id) ?>"
+                                        class="btn btn-primary my-4 mx-2">Back</a>
                                 </div>
                             </form>
 

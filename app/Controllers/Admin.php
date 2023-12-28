@@ -184,7 +184,7 @@ class Admin extends BaseController
             'email' => $email,
             'user_image' => $user_image,
             'password' => $password,
-            'role' => $role
+            'group' => $role
         ]);
 
         $users->save($user);

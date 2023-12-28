@@ -28,8 +28,8 @@
                     <label for="user_group">User Group</label>
                     <select class="form-control" id="user_group" name="role">
                         <option value="admin">Admin</option>
+                        <option value="pedagang">Pedagang</option>
                         <option value="user">Regular</option>
-                        <option value="pedagang">Penjual</option>
                         <!-- Add more options as needed -->
                     </select>
                 </div>
