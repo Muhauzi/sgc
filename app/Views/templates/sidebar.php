@@ -44,7 +44,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="/dashboard/editprofile">
                     <i class="fas fa-user-edit"></i>
                     <span>Edit Profile</span></a>
             </li>
