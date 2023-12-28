@@ -35,12 +35,12 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="col-sm-6 mb-3">
                         <input type="password" name="password"
                             class="form-control form-control-user <?php if (session('errors.password')): ?>is-invalid<?php endif ?>"
                             placeholder="<?= lang('Auth.password') ?>" autocomplete="off">
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 mb-3">
                         <input type="password" name="password_confirm"
                             class="form-control form-control-user <?php if (session('errors.pass_confirm')): ?>is-invalid<?php endif ?>"
                             placeholder="<?= lang('Auth.passwordConfirm') ?>" autocomplete="off">

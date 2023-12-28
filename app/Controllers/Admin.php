@@ -21,7 +21,7 @@ class Admin extends BaseController
 
     public function index()
     {
-        if (! auth()->user()->can('admin.access')) {
+        if (!auth()->user()->can('admin.access')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         // Get all users from the database
@@ -42,7 +42,7 @@ class Admin extends BaseController
 
     public function create()
     {
-        if (! auth()->user()->can('users.create')) {
+        if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $data = [
@@ -55,7 +55,7 @@ class Admin extends BaseController
 
     public function store()
     {
-        if (! auth()->user()->can('users.create')) {
+        if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $users = auth()->getProvider();
@@ -98,7 +98,7 @@ class Admin extends BaseController
 
     public function show($id)
     {
-        if (! auth()->user()->can('users.edit')) {
+        if (!auth()->user()->can('users.edit')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $users = new UserModel();
@@ -127,7 +127,7 @@ class Admin extends BaseController
 
     public function edit($id)
     {
-        if (! auth()->user()->can('users.edit')) {
+        if (!auth()->user()->can('users.edit')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $users = new UserModel();
@@ -148,7 +148,7 @@ class Admin extends BaseController
 
     public function perbarui()
     {
-        if (! auth()->user()->can('users.edit')) {
+        if (!auth()->user()->can('users.edit')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $id = $this->request->getVar('id');
@@ -163,9 +163,16 @@ class Admin extends BaseController
         // Handle the file upload
         $file = $this->request->getFile('user_image');
         if ($file && $file->isValid() && !$file->hasMoved()) {
-            $newName = $file->getRandomName();
-            $file->move('./public/img/profile', $newName);
-            $user_image = '/img/profile/' . $newName;
+            $randomNumber = rand(0, 16777215);
+            $newName = dechex($randomNumber) . '.' . $file->getExtension();
+            $user_image = 'user-' . $newName;
+            $file->move('./img/profile/', $user_image);
+
+            // Delete previous user_image
+            $previousImage = $user->user_image;
+            if ($previousImage && file_exists('./img/profile/' . $previousImage)) {
+                unlink('./img/profile/' . $previousImage);
+            }
         } else {
             $user_image = $user->user_image; // keep the old image if no new image is uploaded
         }
@@ -194,7 +201,7 @@ class Admin extends BaseController
 
     public function delete($id)
     {
-        if (! auth()->user()->can('users.delete')) {
+        if (!auth()->user()->can('users.delete')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $users = new UserModel();
@@ -213,7 +220,7 @@ class Admin extends BaseController
 
     public function toko()
     {
-        if (! auth()->user()->can('admin.access')) {
+        if (!auth()->user()->can('admin.access')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $tokoModel = new TokoModel();
@@ -231,11 +238,11 @@ class Admin extends BaseController
 
     public function tambahkan_toko()
     {
-        if (! auth()->user()->can('users.create')) {
+        if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $usersm = new UserModel();
-        $users = $usersm->findAll(); 
+        $users = $usersm->findAll();
         $data = [
             'title' => 'Tambahkan Toko | SGCommunity',
             'users' => $users
@@ -245,7 +252,7 @@ class Admin extends BaseController
 
     public function tambah_toko()
     {
-        if (! auth()->user()->can('users.create')) {
+        if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $tokoModel = new TokoModel();
