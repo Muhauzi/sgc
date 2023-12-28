@@ -1,44 +1,52 @@
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand bg-night topbar mb-4 static-top shadow">
 
-<!-- Sidebar Toggle (Topbar) -->
-<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-    <i class="fa fa-bars"></i>
-</button>
-
-<h2><b><?= $title; ?></b></h2>
+<h2 class="text-white"><b><?= $title; ?></b></h2>
 
 <!-- Topbar Navbar -->
 <ul class="navbar-nav ml-auto">
 
-    
-
-    <div class="topbar-divider d-none d-sm-block"></div>
-
-    <!-- Nav Item - User Information -->
-    <li class="nav-item dropdown no-arrow">
-    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= auth()->user()->username ;?></span>
-                                <img class="img-profile rounded-circle"
-                                src="<?= base_url() ;?>/img/profile/<?= auth()->user()->user_image ;?>">
-                            </a>
-        <!-- Dropdown - User Information -->
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-            aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profile
+        <!-- Nav Item - User Information -->
+        <li class="nav-item topbar-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle show" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>">
+                <span class="ml-3 d-none d-lg-inline text-white">
+                    Halo, <?= auth()->user()->username; ?>!
+                </span>
             </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Logout
-            </a>
-        </div>
-    </li>
 
-</ul>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu bg-night animated--grow-in py-0" aria-labelledby="userDropdown">
+
+                <div class="container-fluid text-center text-white">
+                    <div class="row justify-content-center">
+                        <img src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>" class="img-user img-profile rounded-circle my-3">
+                        <p><?= auth()->user()->username; ?></p>
+                        <p><?= auth()->user()->inGroup('superadmin', 'admin') ? 'Admin' : 'Customer'; ?></p>
+                    </div>
+                </div>
+
+                <div class="dropdown-item bg-fff-20">
+                    <span class="fw-bold text-white">
+                        <i class="fa-solid fa-cart-shopping mr-3"></i>
+                        Keranjang
+                    </span>
+                </div>
+                <div class="action-btn dropdown-item bg-white p-0 py-1 d-flex justify-content-between">
+                    <span class="text-white ml-2">
+                        <a href="<?= base_url('dashboard'); ?>" class="btn btn-sm bg-night text-white py-0" role="button">
+                            Dashboard
+                        </a>
+                    </span>
+                    <span class="text-white mr-2">
+                        <a class="btn btn-sm bg-night text-white py-0" href="/logout" role="button" data-toggle="modal" data-target="#logoutModal">
+                            Sign Out
+                        </a>
+                    </span>
+                </div>
+            </div> <!-- /.dropdown-menu -->
+        </li>
+    </ul>
 
 </nav>
 <!-- End of Topbar -->

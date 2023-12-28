@@ -1,7 +1,7 @@
 <?= $this->extend('templates/index'); ?>
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
-<div class="container-fluid col-md-8 text-center mx-auto">
+<div class="container-fluid col-10 text-center mx-auto">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Toko Table</h1>
@@ -28,10 +28,9 @@
                             <td><?= $row['fullname']; ?></td>
                             <td><?= $row['alamat_toko']; ?></td>
                             <td><?= $row['nohp_toko']; ?></td>
-                            <td>
+                            <td class="">
                                 <a class="btn btn-info" href="<?= base_url('admin/showToko/' . $row['id']); ?>">Detail</a> |
-                                <a href="<?= base_url('admin/deleteToko/' . $row['id']); ?>" class="btn btn-danger"
-                                    onclick="return confirm('Anda yakin ingin menghapus pengguna ini?')">Delete</a>
+                                <a href="<?= base_url('admin/deleteToko/' . $row['id']); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus pengguna ini?')">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
