@@ -20,7 +20,7 @@ class User extends BaseController
 
         // Pass the users data to the view
         $data = [
-            'title' => 'Users | SGCommunity',
+            'title' => 'Home',
             'users' => $users,
             'user' => $user
         ];

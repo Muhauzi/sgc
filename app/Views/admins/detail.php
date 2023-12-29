@@ -4,13 +4,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col d-flex justify-content-center">
-            <div class="card mb-3" style="max-width: 940px;">
+            <div class="card mb-3">
                 <div class="row g-0">
-                    <div class="col-md-4">
+                    <div class="col-4">
                         <img src="<?= base_url('/img/profile/' . $user->user_image); ?>"
-                            class="img-fluid img-profile rounded-circle m-3" alt="<?= $user->username; ?>">
+                            class="foto-user img-fluid img-profile rounded-circle  d-flex justify-content-center align-items-center p-5" alt="<?= $user->username; ?>">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-8">
                         <div class="card-body my-md-3">
                             <h2 class="text-center" >Informasi Pengguna</h2>
                             <table class="table table-striped">
