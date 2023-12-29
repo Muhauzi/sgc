@@ -1,5 +1,4 @@
-
-            <?= $this->extend('templates/index'); ?>
+<?= $this->extend('templates/index'); ?>
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -36,9 +35,6 @@
                     <button type="submit" class="btn btn-primary">Ubah Grup</button>
                 </form>
             </div>
-
-
-            
         </div>
     </div>
 </div>

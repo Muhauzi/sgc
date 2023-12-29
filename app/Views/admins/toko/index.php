@@ -27,7 +27,7 @@
                             <td><?= $row['nama_toko']; ?></td>
                             <td><?= $row['fullname']; ?></td>
                             <td><?= $row['alamat_toko']; ?></td>
-                            <td><?= $row['nohp_toko']; ?></td>
+                            <td>+62<?= $row['nohp_toko']; ?></td>
                             <td class="">
                                 <a class="btn btn-info" href="<?= base_url('admin/showToko/' . $row['id']); ?>">Detail</a> |
                                 <a href="<?= base_url('admin/deleteToko/' . $row['id']); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus pengguna ini?')">Delete</a>
