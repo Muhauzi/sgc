@@ -28,6 +28,76 @@
                         </div> <!-- /.col-md-8 -->
                     </div> <!-- /.row -->
                 </div>  <!-- /.card -->
+                <!-- Card -->
+                <div class="card my-3 mx-4 border border-dark">
+                    <div class="row g-0">
+                        <div class="card-img col-md-4">
+                            <img src="<?= base_url(); ?>/img/toko[1].jpg" alt="image toko">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nama Toko</h5>
+                                <p class="card-text lh-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, blanditiis similique dicta dolores doloremque obcaecati?</p>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.col-md-8 -->
+                    </div> <!-- /.row -->
+                </div>  <!-- /.card -->
+                <!-- Card -->
+                <div class="card my-3 mx-4 border border-dark">
+                    <div class="row g-0">
+                        <div class="card-img col-md-4">
+                            <img src="<?= base_url(); ?>/img/toko[1].jpg" alt="image toko">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nama Toko</h5>
+                                <p class="card-text lh-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, blanditiis similique dicta dolores doloremque obcaecati?</p>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.col-md-8 -->
+                    </div> <!-- /.row -->
+                </div>  <!-- /.card -->
+                <!-- Card -->
+                <div class="card my-3 mx-4 border border-dark">
+                    <div class="row g-0">
+                        <div class="card-img col-md-4">
+                            <img src="<?= base_url(); ?>/img/toko[1].jpg" alt="image toko">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nama Toko</h5>
+                                <p class="card-text lh-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, blanditiis similique dicta dolores doloremque obcaecati?</p>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.col-md-8 -->
+                    </div> <!-- /.row -->
+                </div>  <!-- /.card -->
+                <!-- Card -->
+                <div class="card my-3 mx-4 border border-dark">
+                    <div class="row g-0">
+                        <div class="card-img col-md-4">
+                            <img src="<?= base_url(); ?>/img/toko[1].jpg" alt="image toko">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nama Toko</h5>
+                                <p class="card-text lh-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, blanditiis similique dicta dolores doloremque obcaecati?</p>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.col-md-8 -->
+                    </div> <!-- /.row -->
+                </div>  <!-- /.card -->
+                <!-- Card -->
+                <div class="card my-3 mx-4 border border-dark">
+                    <div class="row g-0">
+                        <div class="card-img col-md-4">
+                            <img src="<?= base_url(); ?>/img/toko[1].jpg" alt="image toko">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nama Toko</h5>
+                                <p class="card-text lh-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, blanditiis similique dicta dolores doloremque obcaecati?</p>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.col-md-8 -->
+                    </div> <!-- /.row -->
+                </div>  <!-- /.card -->
             </div>  <!-- /.list-group -->
         </div>  <!-- /.sidebar -->
 

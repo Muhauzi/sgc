@@ -52,7 +52,9 @@
 }
 
 html {
-    overflow: hidden;
+    /* overflow: hidden; */
+    font-family: "Poppins", sans-serif;
+    max-height: 100vh;
 }
 
 /* Navbar */
@@ -94,71 +96,33 @@ header {
 }
 
 /* Content */
-.sidebar {
-    border-right: var(--color-green) 2px solid;
-    min-width: 380px;
-    padding-right: 0 !important;
-}
-
-.list-header {
-    background-color: var(--color-green);
-    color: #fff;
-    padding: 0.5rem 1rem;
-}
-
-.list-header h3 {
-    font-family: "Poppins", sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.card, .card-img img {
-    border-radius: 25px;
-}
-
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card-body {
-    padding: 0.5rem 1rem;
-}
-
-.card-title {
-    font-size: 1;
-    font-weight: 500;
-    color: black;
-}
-
-.card-text {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.list-group {
-    max-height: calc(100vh - 160px);
-    overflow-y: auto;
-}
-
-.content {
-    min-height: calc(100vh - 100px);
-    z-index: -1;
+.main {
+    overflow: visible !important;
 }
 
 /* Keranjang */
+.border-bottom {
+    border-bottom: black 2px solid !important; 
+}
+
 .table {
-    max-height: calc(100vh - 100px);
-    overflow-y: auto !important;
+    font-weight: 700;
+    overflow-y: auto;
 }
 
 .table img {
     max-width: 150px;
 }
 
-thead {
-    position: sticky;
+.table input {
+    width: 60px;
+}
+
+.table tbody tr td {
+    border-bottom: black 2px solid;
+}
+
+.table tbody tr td, .table tfoot tr td {
+    vertical-align: middle;
+    font-weight: 700;
 }

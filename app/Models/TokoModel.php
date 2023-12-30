@@ -17,6 +17,7 @@ class TokoModel extends Model
 
         return $this->where(['id' => $id])->first();
     }
+    
     public function getTokoWithFullname()
     {
         $this->join('users', 'toko.id_user = users.id');
@@ -36,5 +37,4 @@ class TokoModel extends Model
         return $this->insert($data);
     }
 }
-    
 ?>

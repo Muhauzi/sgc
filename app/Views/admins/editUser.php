@@ -9,12 +9,12 @@
                 <hr>
                 <div class="row g-0">
 
-                    <div class="col-4 p-5">
+                    <div class="col-4">
                         <img src="<?= base_url('/img/profile/' . $user->user_image); ?>"
-                            class="img-fluid img-profile rounded-circle" alt="<?= $user->username; ?>">
+                            class="foto-user img-fluid img-profile rounded-circle  d-flex justify-content-center align-items-center p-5" alt="<?= $user->username; ?>">
                     </div>
                     <div class="col-8">
-                        <div class="d-flex px-5">
+                        <div class="mr-4">
                             <form action="/admin/perbarui" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="<?= $user->id ?>">
 

@@ -6,7 +6,7 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">User Table</h1>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-12">
             <form class="user" action="/Admin/store" method="post">
                 <?= csrf_field() ?>
 
@@ -25,7 +25,7 @@
 
                 <!-- New input for user group -->
                 <div class="form-group">
-                    <label for="user_group">User Group</label>
+                    <label for="user_group" class="form-label">User Group</label>
                     <select class="form-control" id="user_group" name="role">
                         <option value="admin">Admin</option>
                         <option value="pedagang">Pedagang</option>

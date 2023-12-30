@@ -38,9 +38,21 @@ html {
     padding: 0.5rem 1rem;
 }
 
+.card {
+    width: 100%;
+}
+
 .img-user {
-    width: 45%;
+    max-width: 45%;
+    max-height: 45%;
     height: auto;
+}
+
+.foto-user {
+    min-width: 350px;
+    min-height: 350px;
+    height: auto;
+
 }
 
 .action-btn {
@@ -51,8 +63,4 @@ html {
 .action-btn a:focus, 
 .action-btn a:active { 
     background-color: var(--nav-color-80) !important;
-}
-
-.form-control {
-    width: 150%;
 }

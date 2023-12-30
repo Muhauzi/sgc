@@ -25,8 +25,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="<?= base_url(); ?>/css/main-styles.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="<?= base_url(); ?>/css/cart-styles.css" rel="stylesheet">
 
 </head>
 
@@ -45,7 +44,7 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle show" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>">
+                <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>" alt="">
                 <span class="ml-3 d-none d-lg-inline text-white">
                     Halo, <?= auth()->user()->username; ?>!
                 </span>
