@@ -1,8 +1,10 @@
 :root {
     --color-nav: #2B3A46;
     --color-nav-80: rgba(43, 58, 70, 0.8);
+    --color-nav-50: rgba(43, 58, 70, 0.5);
     --color-green: #84C035;
     --color-green-80: rgba(132, 192, 53, 0.8);
+    --color-green-50: rgba(132, 192, 53, 0.5);
     --color-fff-20: rgba(255, 255, 255, 0.2);
     --color-fff-10: rgba(255, 255, 255, 0.1);
 }
@@ -53,6 +55,7 @@
 
 html {
     overflow: hidden;
+    margin: 0;
 }
 
 /* Navbar */
@@ -112,6 +115,11 @@ header {
     font-weight: 700;
 }
 
+.active {
+    box-shadow: 0 4px 8px 0 var(--color-green-50), 0 6px 20px 0 var(--color-green-80);
+    border: var(--color-green) 1px solid !important;
+}
+
 .card, .card-img img {
     border-radius: 25px;
 }
@@ -144,9 +152,48 @@ header {
     overflow-y: auto;
 }
 
+main {
+    overflow-y: auto !important;
+}
+
 .content {
     min-height: calc(100vh - 100px);
     z-index: -1;
+}
+
+.img-logo {
+    min-width: auto;
+}
+
+.hide {
+    display: none !important;
+}
+
+/* .produk {
+
+} */
+
+.category a {
+    border: #000 1px solid;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+}
+
+.category a:hover, .category a:focus {
+    box-shadow: 0 4px 8px 0 var(--color-nav-50), 0 6px 20px 0 var(--color-nav-80);
+    border: var(--color-nav) 1px solid !important;
+}
+
+.category .active {
+    box-shadow: 0 4px 8px 0 var(--color-nav-50), 0 6px 20px 0 var(--color-nav-80);
+    border: var(--color-nav) 1px solid !important;
+    color: #fff !important;
+    background-color: var(--color-nav);
 }
 
 /* Keranjang */
