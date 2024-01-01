@@ -32,68 +32,68 @@
 
 <body>
 
-<header class="navbar navbar-expand sticky-top topbar pl-4 py-5">
-    <div class="logo">
-        <a href="<?= base_url(); ?>user">
-            <img src="<?= base_url(); ?>/img/logoSGC[2].png" alt="Logo SGC" class="logo" width="90%" height="70%">
-        </a>
-    </div> <!-- /.logo -->
-
-    <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
-
-        <!-- Nav Item - User Information -->
-        <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle show" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>">
-                <span class="ml-3 d-none d-lg-inline text-white">
-                    Halo, <?= auth()->user()->username; ?>!
-                </span>
+    <header class="navbar navbar-expand sticky-top topbar pl-4 py-5">
+        <div class="logo">
+            <a href="<?= base_url(); ?>user">
+                <img src="<?= base_url(); ?>/img/logoSGC[2].png" alt="Logo SGC" class="logo" width="90%" height="70%">
             </a>
+        </div> <!-- /.logo -->
 
-            <!-- Dropdown - User Information -->
-            <div class="dropdown-menu bg-night animated--grow-in py-0" aria-labelledby="userDropdown">
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
 
-                <div class="container-fluid text-center text-white">
-                    <div class="row justify-content-center">
-                        <img src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>" class="img-user img-profile rounded-circle my-3">
-                        <p><?= auth()->user()->username; ?></p>
-                        <!-- User Role -->
-                        <p><?= auth()->user()->inGroup('superadmin', 'admin') ? 'Admin' : 'Customer'; ?></p>
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle show" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
+                    <img class="img-profile rounded-circle" src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>">
+                    <span class="ml-3 d-none d-lg-inline text-white">
+                        Halo, <?= auth()->user()->username; ?>!
+                    </span>
+                </a>
+
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu bg-night animated--grow-in py-0" aria-labelledby="userDropdown">
+
+                    <div class="container-fluid text-center text-white">
+                        <div class="row justify-content-center">
+                            <img src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>" class="img-user img-profile rounded-circle my-3">
+                            <p><?= auth()->user()->username; ?></p>
+                            <!-- User Role -->
+                            <p><?= auth()->user()->inGroup('superadmin', 'admin') ? 'Admin' : 'Customer'; ?></p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="dropdown-item bg-fff-20">
-                    <a href="<?= base_url('keranjang') ?>" class="fw-bold text-white" role="button">
-                        <i class="fa-solid fa-cart-shopping mr-3"></i>
-                        Keranjang
-                    </a>
-                </div>
-                <?php if ($user->inGroup('pedagang')): ?>
-                <div class="dropdown-item bg-fff-20">
-                    <span class="fw-bold text-white">
-                        <i class="fa-solid fa-list-check mr-3"></i>
-                        Pesanan
-                    </span>
-                </div>
-                <?php endif; ?>
-                <div class="action-btn dropdown-item bg-white p-0 py-1 d-flex justify-content-between">
-                    <span class="text-white ml-2">
-                        <a href="<?= base_url('dashboard'); ?>" class="btn btn-sm bg-night text-white py-0" role="button">
-                            Dashboard
+                    <div class="dropdown-item bg-fff-20">
+                        <a href="<?= base_url('keranjang') ?>" class="fw-bold text-white" role="button">
+                            <i class="fa-solid fa-cart-shopping mr-3"></i>
+                            Keranjang
                         </a>
-                    </span>
-                    
-                    <span class="text-white mr-2">
-                        <a class="btn btn-sm bg-night text-white py-0" href="/logout" role="button" data-toggle="modal" data-target="#logoutModal">
-                            Sign Out
-                        </a>
-                    </span>
-                </div>
-            </div> <!-- /.dropdown-menu -->
-        </li>
-    </ul>
-</header>
+                    </div>
+                    <?php if ($user->inGroup('pedagang')): ?>
+                    <div class="dropdown-item bg-fff-20">
+                        <span class="fw-bold text-white">
+                            <i class="fa-solid fa-list-check mr-3"></i>
+                            Pesanan
+                        </span>
+                    </div>
+                    <?php endif; ?>
+                    <div class="action-btn dropdown-item bg-white p-0 py-1 d-flex justify-content-between">
+                        <span class="text-white ml-2">
+                            <a href="<?= base_url('dashboard'); ?>" class="btn btn-sm bg-night text-white py-0" role="button">
+                                Dashboard
+                            </a>
+                        </span>
+                        
+                        <span class="text-white mr-2">
+                            <a class="btn btn-sm bg-night text-white py-0" href="/logout" role="button" data-toggle="modal" data-target="#logoutModal">
+                                Sign Out
+                            </a>
+                        </span>
+                    </div>
+                </div> <!-- /.dropdown-menu -->
+            </li>
+        </ul>
+    </header>
 
     <?= $this->renderSection('content'); ?>
 
@@ -120,6 +120,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Custom script -->
+    <script src="<?= base_url(); ?>/js/main-script.js"></script>
 
     <!-- jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
