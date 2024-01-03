@@ -58,6 +58,7 @@ class Admin extends BaseController
         if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
+
         $users = auth()->getProvider();
         $username = $this->request->getVar('username');
         $email = $this->request->getVar('email');
@@ -217,7 +218,6 @@ class Admin extends BaseController
 
 
     //Admin Toko Section
-
     public function toko()
     {
         if (!auth()->user()->can('admin.access')) {

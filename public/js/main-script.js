@@ -1,14 +1,17 @@
-const card = document.getElementById('card');
-const content = document.getElementById('content');
-const produk = document.getElementById('produk');
-const btnCategory = document.getElementById('categoryButton');
+const store = document.querySelectorAll('#store')
+const content = document.querySelectorAll('#content')
+const product = document.querySelectorAll('#product')
 
-card.addEventListener('click', () => {
-    card.classList.toggle('active');
-    content.classList.toggle('hide');
-    produk.classList.toggle('hide');
-});
-
-btnCategory.addEventListener('click', () => {
-    btnCategory.classList.toggle('active');
-});
+store.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        store.forEach((cardItem, cardIndex) => {
+            if (cardIndex === index) {
+                cardItem.classList.add('active')
+                content[cardIndex].classList.add('hide')
+                product[cardIndex].classList.remove('hide')
+            } else {
+                cardItem.classList.remove('active')
+            }
+        })
+    })
+})

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\Shield\Models\UserModel;
+use App\Models\TokoModel;
+use App\Models\ProdukModel;
 
 class User extends BaseController
 {
@@ -18,11 +20,23 @@ class User extends BaseController
         $users = new UserModel();
         $user = auth()->user();
 
+        // Get all toko from the database
+        $tokos = new TokoModel();
+        $toko = $tokos->findAll();
+
+        // Get all produk from the database
+        $produks = new ProdukModel();
+        $produk = $produks->findAll();
+
         // Pass the users data to the view
         $data = [
             'title' => 'Home',
             'users' => $users,
-            'user' => $user
+            'user' => $user,
+            'tokos' => $toko,
+            'toko' => $toko,
+            'produks' => $produk,
+            'produk' => $produk
         ];
         return view('users/index', $data);
     }
