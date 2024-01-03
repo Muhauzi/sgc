@@ -54,7 +54,7 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu bg-night animated--grow-in py-0" aria-labelledby="userDropdown">
 
-                    <div class="container-fluid text-center text-white">
+                    <div class="container-fluid justify-content-center text-center text-white">
                         <div class="row justify-content-center">
                             <img src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>" class="img-user img-profile rounded-circle my-3">
                             <p><?= auth()->user()->fullname; ?></p>

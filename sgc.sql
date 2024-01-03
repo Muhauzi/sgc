@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Des 2023 pada 07.13
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Waktu pembuatan: 03 Jan 2024 pada 10.17
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `auth_groups_users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `group` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `auth_groups_users`
@@ -40,10 +40,8 @@ CREATE TABLE `auth_groups_users` (
 
 INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
 (1, 1, 'superadmin', '2023-12-14 11:16:21'),
-(2, 2, 'superadmin', '2023-12-14 15:11:54'),
-(3, 5, 'user', '2023-12-14 16:49:38'),
-(4, 3, 'superadmin', '2023-12-14 17:50:34'),
-(11, 16, 'user', '2023-12-20 15:52:26');
+(13, 18, 'pedagang', '2023-12-29 04:17:46'),
+(14, 19, 'user', '2023-12-29 04:24:08');
 
 -- --------------------------------------------------------
 
@@ -64,18 +62,16 @@ CREATE TABLE `auth_identities` (
   `last_used_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `auth_identities`
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'email_password', 'admin1', 'mauzi@gmail.com', '$2y$12$Zsb.Rfg9kylRmZGwOgbRSeNqAswnOJ.5Sn28RdVH64CzDA14Xm/1u', NULL, NULL, 0, '2023-12-24 03:48:48', '2023-12-14 11:16:21', '2023-12-24 03:48:48'),
-(2, 2, 'email_password', NULL, 'fauzirevdl@gmail.com', '$2y$12$nZcHWxebwChiRtJeVp.WX.jBBfh7Xfj3F1JLoQvSYQu1evScftRzu', NULL, NULL, 0, NULL, '2023-12-14 15:11:54', '2023-12-20 16:52:16'),
-(3, 3, 'email_password', NULL, 'admin2@mail.com', '$2y$12$vIpybbEdeyUwJ0sfiBAlSu3e95XuQboFj7dQSAJ/OkKKOXnMoNAca', NULL, NULL, 0, NULL, '2023-12-14 16:33:31', '2023-12-20 16:52:39'),
-(4, 5, 'email_password', NULL, 'fauzimuhamad511@gmail.com', '$2y$12$Zsb.Rfg9kylRmZGwOgbRSeNqAswnOJ.5Sn28RdVH64CzDA14Xm/1u', NULL, NULL, 0, NULL, '2023-12-14 16:49:38', '2023-12-20 16:53:26'),
-(11, 16, 'email_password', NULL, 'imayda@gmail.com', '$2y$12$Zsb.Rfg9kylRmZGwOgbRSeNqAswnOJ.5Sn28RdVH64CzDA14Xm/1u', NULL, NULL, 0, '2023-12-21 06:59:11', '2023-12-20 15:52:26', '2023-12-21 06:59:11');
+(1, 1, 'email_password', 'admin', 'admin@sgc.com', '$2y$12$ZOA2jp5oiL9rT4vxne4imuIal2HY/e4MNSPQEwZ9Hb6rRfmZ1jj9i', NULL, NULL, 0, '2024-01-03 09:16:47', '2023-12-14 11:16:21', '2024-01-03 09:16:47'),
+(12, 18, 'email_password', 'penjual', 'penjual@sgc.com', '$2y$12$YcIpMPDJnVrRpkb8RoJhJODOeIcnZcMP/IRmgxL9XtM8pPkj1cBl.', NULL, NULL, 0, '2024-01-03 09:15:11', '2023-12-29 04:17:46', '2024-01-03 09:15:11'),
+(13, 19, 'email_password', 'user', 'customer@sgc.com', '$2y$12$9tuwffpU1vp3i7PEpFs2UOD2ZOt1pnXAGhA4089QT.as1ssAjdH5C', NULL, NULL, 0, '2024-01-03 09:15:55', '2023-12-29 04:24:08', '2024-01-03 09:15:55');
 
 -- --------------------------------------------------------
 
@@ -92,7 +88,7 @@ CREATE TABLE `auth_logins` (
   `user_id` int(11) UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `auth_logins`
@@ -123,7 +119,31 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identif
 (22, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin1', 1, '2023-12-24 02:46:01', 1),
 (23, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin1', NULL, '2023-12-24 03:47:42', 0),
 (24, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin1', NULL, '2023-12-24 03:47:56', 0),
-(25, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin1', 1, '2023-12-24 03:48:48', 1);
+(25, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin1', 1, '2023-12-24 03:48:48', 1),
+(26, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'wawaw', NULL, '2023-12-29 04:13:35', 0),
+(27, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', NULL, '2023-12-29 04:13:42', 0),
+(28, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'wawaw', NULL, '2023-12-29 04:14:24', 0),
+(29, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'wawaw', NULL, '2023-12-29 04:14:33', 0),
+(30, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2023-12-29 04:15:24', 1),
+(31, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'penjual', NULL, '2023-12-29 04:54:59', 0),
+(32, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'penjual', NULL, '2023-12-29 04:55:10', 0),
+(33, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2023-12-29 04:55:19', 1),
+(34, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'penjual', 18, '2023-12-29 04:56:03', 1),
+(35, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2023-12-29 11:43:32', 1),
+(36, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2023-12-30 13:24:20', 1),
+(37, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2024-01-02 07:35:38', 1),
+(38, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2024-01-02 13:59:29', 1),
+(39, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2024-01-03 06:56:00', 1),
+(40, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'penjual', 18, '2024-01-03 08:12:23', 1),
+(41, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'user', NULL, '2024-01-03 08:12:48', 0),
+(42, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'user', NULL, '2024-01-03 08:12:57', 0),
+(43, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2024-01-03 08:20:43', 1),
+(44, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2024-01-03 09:14:15', 1),
+(45, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'penjual', 18, '2024-01-03 09:14:26', 1),
+(46, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'user', 19, '2024-01-03 09:14:38', 1),
+(47, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'penjual', 18, '2024-01-03 09:15:11', 1),
+(48, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'user', 19, '2024-01-03 09:15:55', 1),
+(49, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0', 'username', 'admin', 1, '2024-01-03 09:16:47', 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +156,7 @@ CREATE TABLE `auth_permissions_users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `permission` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -152,7 +172,7 @@ CREATE TABLE `auth_remember_tokens` (
   `expires` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -169,7 +189,7 @@ CREATE TABLE `auth_token_logins` (
   `user_id` int(11) UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -185,7 +205,7 @@ CREATE TABLE `migrations` (
   `namespace` varchar(255) NOT NULL,
   `time` int(11) NOT NULL,
   `batch` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `migrations`
@@ -205,19 +225,10 @@ INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`
 CREATE TABLE `produk_toko` (
   `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(255) NOT NULL,
-  `harga_produk` int(40) NOT NULL,
-  `deskripsi_produk` text NOT NULL,
   `foto_produk` varchar(255) NOT NULL,
-  `jenis_produk` varchar(255) NOT NULL,
+  `stok_produk` varchar(10) NOT NULL,
   `id_toko` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `produk_toko`
---
-
-INSERT INTO `produk_toko` (`id_produk`, `nama_produk`, `harga_produk`, `deskripsi_produk`, `foto_produk`, `jenis_produk`, `id_toko`) VALUES
-(1, 'Seblak Mie', 12000, 'Mie Indomie rendang dengan sayuuran dan toping bakso', '', 'Makanan', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -234,7 +245,7 @@ CREATE TABLE `settings` (
   `context` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -248,15 +259,16 @@ CREATE TABLE `toko` (
   `nama_toko` varchar(255) NOT NULL,
   `alamat_toko` text NOT NULL,
   `nohp_toko` int(13) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `toko`
 --
 
 INSERT INTO `toko` (`id_toko`, `id_user`, `nama_toko`, `alamat_toko`, `nohp_toko`) VALUES
-(1, 16, 'Warung Seblak', 'B24', 85482584),
-(2, 1, 'Sembako Murrah', 'C12', 0);
+(5, 18, 'Srikandi', 'Blok C4', 8123),
+(6, 18, 'Gramedia', 'Blok A1', 8123),
+(8, 18, 'Kandita', 'Blok G9', 8123);
 
 -- --------------------------------------------------------
 
@@ -276,18 +288,16 @@ CREATE TABLE `users` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `fullname`, `user_image`, `status`, `status_message`, `active`, `last_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin13', 'Ziphius Cavier', 'user-6587a083011e7.jpg', NULL, NULL, 1, '2023-12-24 06:05:21', '2023-12-14 11:16:20', '2023-12-24 04:48:47', NULL),
-(2, 'superadmin', 'Mang Emon', 'default.svg', NULL, NULL, 1, NULL, '2023-12-14 15:11:53', '2023-12-20 16:49:16', NULL),
-(3, 'admin2', 'Leonidas', 'default.svg', NULL, NULL, 0, NULL, '2023-12-14 16:33:31', '2023-12-20 16:52:38', NULL),
-(5, 'user1', 'Muhamad Fauzi', 'default.svg', NULL, NULL, 0, NULL, '2023-12-14 16:49:37', '2023-12-21 07:11:14', '2023-12-21 07:11:14'),
-(16, 'penjual1', 'Amin Suprata', 'user-65832a2de17c6.jpeg', NULL, NULL, 1, NULL, '2023-12-20 15:52:25', '2023-12-20 17:53:49', NULL);
+(1, 'admin', 'Wawan', 'user-6587a083011e7.jpg', NULL, NULL, 1, '2024-01-03 09:16:47', '2023-12-14 11:16:20', '2023-12-24 04:48:47', NULL),
+(18, 'penjual', 'Rere', '', NULL, NULL, 1, '2024-01-03 09:15:16', '2023-12-29 04:17:46', '2023-12-29 04:17:46', NULL),
+(19, 'user', 'Dede', '', NULL, NULL, 1, '2024-01-03 09:16:41', '2023-12-29 04:24:08', '2023-12-29 04:24:08', NULL);
 
 --
 -- Indexes for dumped tables
@@ -380,19 +390,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `auth_identities`
 --
 ALTER TABLE `auth_identities`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `auth_permissions_users`
@@ -434,13 +444,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT untuk tabel `toko`
 --
 ALTER TABLE `toko`
-  MODIFY `id_toko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_toko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
