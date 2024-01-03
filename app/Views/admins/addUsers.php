@@ -30,7 +30,6 @@
                         <option value="admin">Admin</option>
                         <option value="pedagang">Pedagang</option>
                         <option value="user">Regular</option>
-                        <!-- Add more options as needed -->
                     </select>
                 </div>
 
