@@ -17,18 +17,20 @@
                 </div>
                 <div class="form-group">
                     <label for="owner">Owner</label>
-                    <select name="idPemilik" id="owner"
-                        class="form-control form-select form-select-transition form-control-user">
+                    <select name="idPemilik" id="owner" class="form-control form-select form-select-transition form-control-user">
                         <?php foreach ($users as $user): ?>
-                        <option value="<?= $user->id; ?>">
-                            <?= $user->fullname; ?>
-                        </option>
+                            <option value="<?= $user->id; ?>">
+                                <?= $user->fullname; ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="nohp">Nomor Telepon Toko</label>
-                    <input type="text" class="form-control form-control-user" name="telepon_toko" id="noHp">
+                    <div class="input-group">
+                        <span class="input-group-text bg-secondary text-white">+62</span>
+                        <input type="text" class="form-control form-control-user" name="telepon_toko" id="noHp" placeholder="8xxxxxxxxxx">
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-user btn-block">

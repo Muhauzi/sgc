@@ -118,6 +118,12 @@ header {
 .active {
     box-shadow: 0 4px 8px 0 var(--color-green-50), 0 6px 20px 0 var(--color-green-80);
     border: var(--color-green) 1px solid !important;
+    border-radius: 25px;
+}
+
+.card a {
+    text-decoration: none;
+    color: #000;
 }
 
 .card, .card-img img {
@@ -135,8 +141,8 @@ header {
 }
 
 .card-title {
-    font-size: 1;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: black;
 }
 
@@ -145,6 +151,7 @@ header {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin: 0;
 }
 
 .list-group {
@@ -154,6 +161,7 @@ header {
 
 main {
     overflow-y: auto !important;
+    min-width: calc(100vw - 357px) !important;
 }
 
 .content {
@@ -169,43 +177,7 @@ main {
     display: none !important;
 }
 
-/* .produk {
-
-} */
-
-.category a {
-    border: #000 1px solid;
-    border-radius: 25px;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #000;
-    background-color: #fff;
-}
-
-.category a:hover, .category a:focus {
-    box-shadow: 0 4px 8px 0 var(--color-nav-50), 0 6px 20px 0 var(--color-nav-80);
-    border: var(--color-nav) 1px solid !important;
-}
-
-.category .active {
-    box-shadow: 0 4px 8px 0 var(--color-nav-50), 0 6px 20px 0 var(--color-nav-80);
-    border: var(--color-nav) 1px solid !important;
-    color: #fff !important;
-    background-color: var(--color-nav);
-}
-
-/* Keranjang */
-.table {
-    max-height: calc(100vh - 100px);
-    overflow-y: auto !important;
-}
-
-.table img {
-    max-width: 150px;
-}
-
-thead {
-    position: sticky;
+/* Product */
+#product {
+    max-height: calc(100dvh - 95px);
 }
