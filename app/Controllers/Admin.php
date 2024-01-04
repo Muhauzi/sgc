@@ -7,16 +7,20 @@ use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Models\UserModel;
 use CodeIgniter\Files\File;
 use App\Models\TokoModel;
+use Config\Validation;
 
 class Admin extends BaseController
 {
     protected $pengguna, $db, $helpers = ['form', 'url'];
+
+    protected $validator;
 
     public function __construct()
     {
         // Load necessary models, libraries, or helpers here
         $db = \Config\Database::connect();
         $pengguna = new UserModel();
+        $validator = \Config\Services::validation();
     }
 
     public function index()
@@ -55,6 +59,19 @@ class Admin extends BaseController
 
     public function store()
     {
+        // Validation rules
+        $rules = [
+            'username' => 'required|min_length[3]|max_length[50]',
+            'email' => 'required|valid_email',
+            'password' => 'required|min_length[6]',
+            'password_confirm' => 'required|matches[password]'
+        ];
+
+        // Run validation
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', 'Salah bang');
+        }
+
         if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
@@ -81,7 +98,6 @@ class Admin extends BaseController
             return redirect()->to('/admin')->with('error', 'Failed to create user');
         }
 
-
         $users->addToDefaultGroup($user);
 
         // Save auth_groups_users
@@ -91,7 +107,6 @@ class Admin extends BaseController
         } else {
             $user->addGroup('user');
         }
-
 
         // Redirect to the user index page
         return redirect()->to('/admin')->with('success', 'User created successfully');
@@ -223,6 +238,7 @@ class Admin extends BaseController
         if (!auth()->user()->can('admin.access')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
+
         $tokoModel = new TokoModel();
         // $toko = $tokoModel->findAll();
         $tokos = $tokoModel->getTokoWithFullname();
@@ -247,6 +263,7 @@ class Admin extends BaseController
             'title' => 'Tambahkan Toko | SGCommunity',
             'users' => $users
         ];
+
         return view('admins/toko/tambah', $data);
     }
 

@@ -63,12 +63,7 @@
             <span><b>Menu Pedagang</b></span>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user/product'); ?>">
-                <i class="fas fa-table-list"></i>
-                <span>Pesanan Masuk</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user/product'); ?>">
+            <a class="nav-link" href="<?= base_url('toko'); ?>">
                 <i class="fas fa-box"></i>
                 <span>Kelola Produk</span></a>
         </li>
