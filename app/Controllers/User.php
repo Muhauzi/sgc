@@ -48,7 +48,7 @@ class User extends BaseController
             'title' => 'Profile | SGCommunity',
             'user' => $user
         ];
-        return view('users/profile', $data);
+        return view('users/dashboard/profile', $data);
     }
 
     public function editProfile()
@@ -60,5 +60,7 @@ class User extends BaseController
         ];
         return view('users/edit_profile', $data);
     }
+
+    
 }
 
