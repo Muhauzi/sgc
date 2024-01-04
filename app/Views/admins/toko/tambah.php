@@ -16,14 +16,8 @@
                     <input type="text" class="form-control form-control-user" name="alamat_toko" placeholder="Alamat Toko">
                 </div>
                 <div class="form-group">
-                    <label for="owner">Owner</label>
-                    <select name="idPemilik" id="owner" class="form-control form-select form-select-transition form-control-user">
-                        <?php foreach ($users as $user): ?>
-                            <option value="<?= $user->id; ?>">
-                                <?= $user->fullname; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <label for="deskripsi">Deskripsi Toko</label>
+                    <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="nohp">Nomor Telepon Toko</label>
@@ -32,11 +26,24 @@
                         <input type="text" class="form-control form-control-user" name="telepon_toko" id="noHp" placeholder="8xxxxxxxxxx">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="owner">Owner</label>
+                    <select name="owner" id="owner" class="form-control form-control-select">
+                        <?php foreach ($users as $user): ?>
+                            <option value="<?= $user->id_user; ?>"><?= $user->fullname; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form_group">
+                    <label for="foto">Logo Toko</label>
+                    <input type="file" class="form-control form-control-file" name="foto" id="foto">
+                </div>
 
-                <button type="submit" class="btn btn-primary btn-user btn-block">
+                <button type="submit" class="btn btn-primary btn-user btn-block mt-4">
                     <?= lang('Auth.register') ?>
                 </button>
             </form>
+            
 
         </div>
     </div>

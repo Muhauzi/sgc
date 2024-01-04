@@ -278,16 +278,17 @@ class Admin extends BaseController
         $namaToko = $this->request->getVar('nama_toko');
         $alamatToko = $this->request->getVar('alamat_toko');
         $teleponToko = $this->request->getVar('telepon_toko');
-        $idUser = $this->request->getVar('idPemilik'); // Add this line to get the id_user from the form
+        $idUser = $this->request->getVar('owner'); // Add this line to get the id_user from the form
 
         // Create a new toko record
         $tokoData = [
             'nama_toko' => $namaToko,
             'alamat_toko' => $alamatToko,
             'nohp_toko' => $teleponToko,
-            'id_user' => $idUser // Add id_user to the tokoData array
+            'user_id' => $idUser // Add id_user to the tokoData array
         ];
         $tokoModel->insert($tokoData);
+        
 
         session()->setFlashdata('success', 'Toko berhasil ditambahkan');
         return redirect()->to('/admin/toko');

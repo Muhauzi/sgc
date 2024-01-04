@@ -7,7 +7,7 @@
     class TokoModel extends Model {
         protected $table = 'toko';
         protected $primaryKey = 'id_toko';
-        protected $allowedFields = ['nama_toko', 'alamat_toko', 'nohp_toko', 'id_user'];
+        protected $allowedFields = ['nama_toko', 'alamat_toko', 'deskripsi', 'nohp_toko', 'user_id'];
 
         public function getToko($id = false) {
             if ($id === false) {
@@ -18,17 +18,18 @@
         }
         
         public function getTokoWithFullname() {
-            $this->join('users', 'toko.id_user = users.id');
+            $this->join('users', 'toko.user_id = users.id');
 
             return $this->findAll();
         }
 
-        public function saveToko($namaToko, $alamatToko, $nohpToko, $idUser) {
+        public function saveToko($namaToko, $alamatToko, $deskripsiToko, $nohpToko, $idUser) {
             $data = [
                 'nama_toko' => $namaToko,
                 'alamat_toko' => $alamatToko,
+                'deskripsi' => $deskripsiToko,
                 'nohp_toko' => $nohpToko,
-                'id_user' => $idUser
+                'user_id' => $idUser
             ];
 
             return $this->insert($data);
