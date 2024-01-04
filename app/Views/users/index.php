@@ -61,21 +61,23 @@
                     </div>
 
                     <!-- Product -->
-                    <div class="row column-gap-5 justify-content-between mx-5">
-                        <div class="product col-5 mb-3">
-                            <div class="card border border-dark">
-                                <div class="row">
-                                    <div class="card-img col-4">
-                                        <img src="<?= base_url(); ?>/img/toko[1].jpg" alt="image produk">
-                                    </div> <!-- /.card-img -->
-                                    <div class="card-body col-8">
-                                        <h5 class="card-title">Kopi</h5>
-                                        <p class="card-text lh-sm">Rp. 50.000</p>
-                                    </div> <!-- /.card-body -->
-                                </div> <!-- /.row -->
-                            </div> <!-- /.card -->
-                        </div> <!-- /.product -->
-
+                    <div class="row justify-content-between mx-5">
+                        <?php foreach ($produks as $product): ?>
+                            <div class="product col-6 mb-3">
+                                <div class="card border border-dark">
+                                    <div class="row">
+                                        <div class="card-img col-4">
+                                            <img src="<?= base_url(); ?>/img/toko[1].jpg" alt="image produk">
+                                        </div> <!-- /.card-img -->
+                                        <div class="card-body col-8">
+                                            <h5 class="card-title"><?= $product['nama_produk']; ?></h5>
+                                            <p class="card-text"><?= $product['tersedia'] ? 'Tersedia' : 'Stok Habis'; ?></p>
+                                            <p class="card-text lh-sm">Rp. <?= $product['harga_produk']; ?>.000</p>
+                                        </div> <!-- /.card-body -->
+                                    </div> <!-- /.row -->
+                                </div> <!-- /.card -->
+                            </div> <!-- /.product -->
+                        <?php endforeach; ?>
                     </div>
 
                 </div> <!-- /.row -->
