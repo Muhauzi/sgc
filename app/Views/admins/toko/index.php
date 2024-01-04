@@ -29,8 +29,8 @@
                             <td><?= $row['alamat_toko']; ?></td>
                             <td>+62<?= $row['nohp_toko']; ?></td>
                             <td class="">
-                                <a class="btn btn-info" href="<?= base_url('admin/showToko/' . $row['id']); ?>">Detail</a> |
-                                <a href="<?= base_url('admin/deleteToko/' . $row['id']); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus pengguna ini?')">Delete</a>
+                                <a class="btn btn-info" href="<?= base_url('admin/detail_toko/' . $row['id_toko']); ?>">Detail</a> |
+                                <a href="<?= base_url('admin/delete_toko/' . $row['id']); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus toko ini?')">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

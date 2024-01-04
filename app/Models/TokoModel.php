@@ -23,6 +23,12 @@
             return $this->findAll();
         }
 
+        public function getTokoWithFullnameById($id) {
+            $this->join('users', 'toko.user_id = users.id');
+
+            return $this->where(['id_toko' => $id])->first();
+        }
+
         public function saveToko($namaToko, $alamatToko, $deskripsiToko, $nohpToko, $idUser) {
             $data = [
                 'nama_toko' => $namaToko,
@@ -33,6 +39,18 @@
             ];
 
             return $this->insert($data);
+        }
+
+        public function updateToko($idToko, $namaToko, $alamatToko, $deskripsiToko, $nohpToko, $idUser) {
+            $data = [
+                'nama_toko' => $namaToko,
+                'alamat_toko' => $alamatToko,
+                'deskripsi' => $deskripsiToko,
+                'nohp_toko' => $nohpToko,
+                'foto' => $foto
+            ];
+
+            return $this->update($idToko, $data);
         }
     }
 ?>
