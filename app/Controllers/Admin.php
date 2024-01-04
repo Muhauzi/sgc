@@ -252,16 +252,30 @@ class Admin extends BaseController
 
     public function tambah_toko()
     {
+        
         if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
         $tokoModel = new TokoModel();
 
+        // Validation rules
+        $rules = [
+            'nama_toko' => 'required|min_length[3]|max_length[50]',
+            'alamat_toko' => 'required|min_length[3]|max_length[50]',
+            'telepon_toko' => 'required|min_length[3]|max_length[50]',
+            'owner' => 'required'
+        ];
+
+        // Run validation
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', 'Salah bang');
+        }
+
         // Get the input data from the form
         $namaToko = $this->request->getVar('nama_toko');
         $alamatToko = $this->request->getVar('alamat_toko');
         $teleponToko = $this->request->getVar('telepon_toko');
-        $idUser = $this->request->getVar('owner'); // Add this line to get the id_user from the form
+        $idUser = $this->request->getVar('owner'); 
 
         // Create a new toko record
         $tokoData = [
@@ -271,9 +285,121 @@ class Admin extends BaseController
             'user_id' => $idUser // Add id_user to the tokoData array
         ];
         $tokoModel->insert($tokoData);
+        // d($tokoData);
         
 
         session()->setFlashdata('success', 'Toko berhasil ditambahkan');
         return redirect()->to('/admin/toko');
     }
+
+    public function edit_toko($id)
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $tokoModel = new TokoModel();
+        $toko = $tokoModel->find($id);
+        
+        $usersm = new UserModel();
+        $users = $usersm->findAll();
+
+        $pemilik = $tokoModel->getTokoWithFullnameById($id);
+
+        if ($toko) {
+            $data = [
+                'title' => 'Edit Toko | SGCommunity',
+                'toko' => $toko,
+                'users' => $users,
+                'pemilik' => $pemilik
+            ];
+            return view('admins/toko/edit', $data);
+        }
+    }
+
+    public function perbarui_toko(){
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $id = $this->request->getVar('id');
+        $namaToko = $this->request->getVar('nama_toko');
+        $alamatToko = $this->request->getVar('alamat_toko');
+        $deskripsiToko = $this->request->getVar('deskripsi_toko');
+        $teleponToko = $this->request->getVar('telepon_toko');
+        $idUser = $this->request->getVar('owner');
+
+        $tokoModel = new TokoModel();
+
+        $toko = $tokoModel->find($id);
+
+        // Handle the file upload
+        $file = $this->request->getFile('foto');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $randomNumber = rand(0, 16777215);
+            $newName = dechex($randomNumber) . '.' . $file->getExtension();
+            $foto = 'toko-' . $newName;
+            $file->move('./img/toko/', $foto);
+
+            // Delete previous user_image
+            $previousImage = $toko->foto;
+            if ($previousImage && file_exists('./img/toko/' . $previousImage)) {
+                unlink('./img/toko/' . $previousImage);
+            }
+        } else {
+            $foto = $toko['foto']; // keep the old image if no new image is uploaded
+        }
+
+        // save updated data
+        $toko = [
+            'nama_toko' => $namaToko,
+            'alamat_toko' => $alamatToko,
+            'deskripsi' => $deskripsiToko,
+            'nohp_toko' => $teleponToko,
+            'foto' => $foto,
+            'user_id' => $idUser
+        ];
+
+        $res = $tokoModel->update($id, $toko);
+
+        session()->setFlashdata('success', 'Data Berhasil Diubah');
+        return redirect()->to('/admin/toko');
+    }
+
+    public function delete_toko($id)
+    {
+        if (!auth()->user()->can('users.delete')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $tokoModel = new TokoModel();
+        $toko = $tokoModel->find($id);
+
+        if ($toko) {
+            $tokoModel->delete($id);
+            return redirect()->to('/admin/toko')->with('success', 'Toko berhasil dihapus');
+        } else {
+            return redirect()->to('/admin/toko')->with('error', 'Toko tidak ditemukan');
+        }
+    }
+
+    public function detail_toko($id)
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $tokoModel = new TokoModel();
+        $toko = $tokoModel->find($id);
+        $pemilik = $tokoModel->getTokoWithFullnameById($id);
+
+        if ($toko) {
+            $data = [
+                'title' => 'Detail Toko | SGCommunity',
+                'pemilik' => $pemilik,
+                'toko' => $toko
+            ];
+            return view('admins/toko/detail', $data);
+        } else {
+            return redirect()->to('/admin/toko/detail')->with('error', 'Toko tidak ditemukan');
+        }
+    }
+
+
 }
