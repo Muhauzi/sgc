@@ -49,7 +49,7 @@
     </li>
 
     <!-- Divider -->
-    <?php if (auth()->user()->inGroup('pedagang', 'superadmin')): ?>
+    <?php if (auth()->user()->inGroup('pedagang')): ?>
         <hr class="sidebar-divider">
         <li class="nav-item mx-3 text-white">
             <i class="fas fa-store"></i>
