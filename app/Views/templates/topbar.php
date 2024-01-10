@@ -22,7 +22,7 @@
                     <div class="row justify-content-center">
                         <img src="<?= base_url(); ?>/img/profile/<?= auth()->user()->user_image; ?>" class="img-user img-profile rounded-circle my-3">
                         <p><?= auth()->user()->fullname; ?></p>
-                        <p><?= auth()->user()->inGroup('superadmin', 'admin') ? 'Admin' : 'Customer'; ?></p>
+                        <p><?= auth()->user()->inGroup('superadmin') ? 'Admin' : (auth()->user()->inGroup('pedagang') ? 'Pemilik Toko' : 'User'); ?></p>
                     </div>
                 </div>
 

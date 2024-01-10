@@ -79,6 +79,14 @@ class AuthGroups extends ShieldAuthGroups
         'users.edit'          => 'Can edit existing non-admin users',
         'users.delete'        => 'Can delete existing non-admin users',
         'beta.access'         => 'Can access beta-level features',
+        'profile.view'        => 'Can view own profile',
+        'profile.edit'        => 'Can edit own profile',
+        'toko.editprofile'    => 'Can edit profile toko',
+        'produk.edit'         => 'Can edit produk',
+        'produk.delete'       => 'Can delete produk',
+        'produk.create'       => 'Can create produk',
+        'produk.view'         => 'Can view produk',
+
     ];
 
     /**
@@ -102,12 +110,15 @@ class AuthGroups extends ShieldAuthGroups
             'users.delete',
             'beta.access',
         ],
-        'developer' => [
-            'admin.access',
-            'admin.settings',
-            'users.create',
-            'users.edit',
-            'beta.access',
+        'pedagang' => [
+            'profile.view',
+            'profile.edit',
+            'toko.editprofile',
+            'produk.edit',
+            'produk.delete',
+            'produk.create',
+            'produk.view',
+            
         ],
         'user' => [],
         'beta' => [

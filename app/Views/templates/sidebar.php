@@ -62,7 +62,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user/product'); ?>">
+            <a class="nav-link" href="<?= base_url('toko/listProduk'); ?>">
                 <i class="fas fa-box"></i>
                 <span>Kelola Produk</span></a>
         </li>
