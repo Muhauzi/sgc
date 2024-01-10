@@ -57,13 +57,32 @@
         <div class="form-group row">
             <label for="foto" class="col-sm-2 col-form-label">Foto Toko</label>
             <div class="col-sm-2">
-                <img src="/img/toko/<?= $toko['foto']; ?>" class="img-thumbnail img-preview">
+                <?php if (empty($_FILES['toko_image']['name'])): ?>
+                    <img src="/img/toko/<?= $toko['foto']; ?>" id="preview" class="img-thumbnail img-preview">
+                <?php else: ?>
+                    <img src="" id="preview" class="img-thumbnail img-preview" style="display: none;">
+                <?php endif; ?>
             </div>
             <div class="col-sm-8">
                 <label for="toko_image">Profile Image (leave blank to keep the same)</label>
-                <input class="form-control" type="file" id="toko_image" name="toko_image">
+                <input class="form-control" type="file" id="toko_image" name="toko_image" onchange="previewImage(event)">
+                <img id="preview" class="img-thumbnail img-preview" style="display: none;">
             </div>
         </div>
+
+        <script>
+            function previewImage(event) {
+                var input = event.target;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('preview').src = e.target.result;
+                        document.getElementById('preview').style.display = 'block';
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
         .<div class="form-group row justify-content-end">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Edit Profile</button> | <a href="/toko">Profile Toko</a>
