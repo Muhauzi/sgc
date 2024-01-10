@@ -27,7 +27,7 @@ class Dashboard extends BaseController
         $user = auth()->user();
         if ($user->inGroup('superadmin')) { // Use $this->in_groups() instead of in_groups()
             return view('admins/index', $data);
-        } elseif ($user->inGroup('admin')) { // Use $this->in_groups() instead of in_groups()
+        } elseif ($user->inGroup('pedagang')) { // Use $this->in_groups() instead of in_groups()
             return view('admins/index', $data);
         } elseif ($user->inGroup('user')) { // Use $this->in_groups() instead of in_groups()
             return view('users/dashboard/profile', $data);

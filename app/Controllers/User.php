@@ -38,6 +38,7 @@ class User extends BaseController
             'produks' => $produk,
             'produk' => $produk
         ];
+        
         return view('users/index', $data);
     }
 
