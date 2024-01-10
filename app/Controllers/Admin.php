@@ -81,9 +81,6 @@ class Admin extends BaseController
             return redirect()->to('/admin')->with('error', 'Failed to create user');
         }
 
-
-        $users->addToDefaultGroup($user);
-
         // Save auth_groups_users
         $group_id = $this->request->getVar('role');
         if ($group_id !== null) {

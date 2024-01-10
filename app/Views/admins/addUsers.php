@@ -23,6 +23,7 @@
                         name="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>">
                 </div>
 
+                
                 <!-- New input for user group -->
                 <div class="form-group">
                     <label for="user_group" class="form-label">User Group</label>

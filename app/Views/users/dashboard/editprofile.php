@@ -14,7 +14,7 @@
                 <div class="col-8">
                     <div class="card-body my-3">
                         <div class="card-body">
-                            <form action="/dashboard/update" method="post" enctype="multipart/form-data">
+                            <form action="/user/update" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="<?= user_id() ?>">
 
                                 <label for="username">Username</label>

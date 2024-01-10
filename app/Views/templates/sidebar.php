@@ -48,13 +48,6 @@
             <span>Edit Profile</span></a>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-receipt"></i>
-            <span>Pesanan Saya</span></a>
-    </li>
-
     <!-- Divider -->
     <?php if (auth()->user()->inGroup('pedagang', 'superadmin')): ?>
         <hr class="sidebar-divider">
@@ -63,10 +56,11 @@
             <span><b>Menu Pedagang</b></span>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user/product'); ?>">
-                <i class="fas fa-table-list"></i>
-                <span>Pesanan Masuk</span></a>
+            <a class="nav-link" href="<?= base_url('toko/'); ?>">
+                <i class="fas fa-store"></i>
+                <span>Profile Toko</span></a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('user/product'); ?>">
                 <i class="fas fa-box"></i>

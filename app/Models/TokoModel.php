@@ -29,6 +29,10 @@
             return $this->where(['id_toko' => $id])->first();
         }
 
+        public function getTokoByUserId($id) {
+            return $this->where(['user_id' => $id])->first();
+        }
+
         public function saveToko($namaToko, $alamatToko, $deskripsiToko, $fotoToko, $nohpToko, $idUser) {
             $data = [
                 'nama_toko' => $namaToko,

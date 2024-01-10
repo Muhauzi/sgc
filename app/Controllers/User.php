@@ -62,6 +62,45 @@ class User extends BaseController
         return view('users/edit_profile', $data);
     }
 
+    public function update()
+    {
+        $id = $this->request->getVar('id');
+        if (! user_id() == $id) {
+            return redirect()->back()->with('error', 'Tidak DApat Menyimpan Perubahan Profile');
+        }
+        $username = $this->request->getVar('username');
+        $fullname = $this->request->getVar('fullname');
+        $email = $this->request->getVar('email');
+        $password = $this->request->getVar('password');
+        $user_image = $this->request->getFile('user_image');
+        $users = auth()->getProvider();
+
+        $user = $users->findById($id);
+
+        $user->fill([
+            'username' => $username,
+            'fullname' => $fullname,
+            'email' => $email,
+            'password' => $password,
+        ]);
+
+        // Check if a new image file was uploaded
+        if ($user_image->isValid() && !$user_image->hasMoved()) {
+            // Generate a unique filename for the uploaded image
+            $newFileName = $user_image->getRandomName();
+            
+            // Move the uploaded image to the desired directory
+            $user_image->move(ROOTPATH . 'public/img/profile', $newFileName);
+            
+            // Update the user's image field with the new filename
+            $user->user_image = $newFileName;
+        }
+
+        $users->save($user);
+
+        return redirect()->back()->with('success', 'Berhasil Menyimpan Perubahan Profile');
+    }
+
     
 }
 
