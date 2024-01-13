@@ -11,13 +11,30 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Username : <?= $user->username ;?></li>
+                        <table class="table">
+                            <tr>
+                                <th>Username</th>
+                                <th>:</th>
+                                <td><?= $user->username ?></td>
+                            </tr>
                             <?php if($user->fullname): ?>
-                                <li class="list-group-item">Fullname : <?= $user->fullname ;?></li>
+                                <tr>
+                                    <th>Fullname</th>
+                                    <th>:</th>
+                                    <td><?= $user->fullname ?></td>
+                                </tr>
                             <?php endif; ?>
-                            <li class="list-group-item">Email : <?= $user->email ;?></li>
-                        </ul>
+                            <tr>
+                                <th>Email</th>
+                                <th>:</th>
+                                <td><?= $user->email ?></td>
+                            </tr>
+                            <tr>
+                                <th>No Telepon</th>
+                                <th>:</th>
+                                <td><?= $user->nohp ?></td>
+                            </tr>
+                        </table>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $toko['nama_toko']; ?></h5>
-                                <p class="card-text lh-sm">+62<?= $toko['nohp_toko']; ?></p>
+                                <p class="card-text lh-sm"><?= $toko['nohp_toko']; ?></p>
                                 <p class="card-text lh-sm"><?= $toko['alamat_toko']; ?></p>
                             </div> <!-- /.card-body -->
                         </div> <!-- /.col-md-8 -->

@@ -29,6 +29,10 @@
                                 <label for="email">Email</label>
                                 <input class="form-control" type="email" id="email" name="email"
                                     value="<?= $user->email ?>">
+                                
+                                <label for="nohp">No Telepon</label>
+                                <input class="form-control" type="number" id="nohp" name="nohp"
+                                    value="<?= $user->nohp ?>">
 
                                 <label for="password">Password (leave blank to keep the same)</label>
                                 <input class="form-control" type="password" id="password" name="password">
@@ -37,7 +41,7 @@
                                 <select class="form-control" id="role" name="role">
                                     <!-- Replace 'admin', 'user' with your actual roles -->
                                     <option value="admin" <?= $user->role == 'admin' ? 'selected' : '' ?>>Admin</option>
-                                    <option value="admin" <?= $user->role == 'pedagang' ? 'selected' : '' ?>>Pedagang</option>
+                                    <option value="pedagang" <?= $user->role == 'pedagang' ? 'selected' : '' ?>>Pedagang</option>
                                     <option value="user" <?= $user->role == 'user' ? 'selected' : '' ?>>User</option>
                                 </select>
 

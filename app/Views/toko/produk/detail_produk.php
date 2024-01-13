@@ -23,7 +23,7 @@
                             <tr>
                                 <td>Harga Produk</td>
                                 <td>:</td>
-                                <td><?= $produk['harga_produk']; ?></td>
+                                <td><?= "Rp " . number_format($produk['harga_produk'], 0, ',', '.'); ?></td>
                             </tr>
                             <tr>
                                 <td>Stok Produk</td>
@@ -34,6 +34,15 @@
                                 <td>Deskripsi Produk</td>
                                 <td>:</td>
                                 <td><?= $produk['deskripsi_produk']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Ketersediaan Barang</td>
+                                <td>:</td>
+                                <td>
+                                    <span class="badge <?= $produk['tersedia'] == 1 ? 'badge-success' : 'badge-danger'; ?>">
+                                        <?= $produk['tersedia'] == 1 ? 'Tersedia' : 'Tidak Tersedia'; ?>
+                                    </span>
+                                </td>
                             </tr>
                         </table>
                         <div class="navbtn mt-5">

@@ -7,6 +7,7 @@ use CodeIgniter\Shield\Models\UserModel;
 use App\Models\TokoModel;
 use App\Models\ProdukModel;
 
+
 class User extends BaseController
 {
     public function __construct()
@@ -33,7 +34,6 @@ class User extends BaseController
             'title' => 'Home',
             'users' => $users,
             'user' => $user,
-            'tokos' => $toko,
             'toko' => $toko,
             'produks' => $produk,
             'produk' => $produk
@@ -73,6 +73,7 @@ class User extends BaseController
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         $user_image = $this->request->getFile('user_image');
+        $nohp = $this->request->getVar('nohp');
         $users = auth()->getProvider();
 
         $user = $users->findById($id);
@@ -80,6 +81,7 @@ class User extends BaseController
         $user->fill([
             'username' => $username,
             'fullname' => $fullname,
+            'nohp' => $nohp,
             'email' => $email,
             'password' => $password,
         ]);
@@ -99,6 +101,22 @@ class User extends BaseController
         $users->save($user);
 
         return redirect()->back()->with('success', 'Berhasil Menyimpan Perubahan Profile');
+    }
+
+    public function help()
+    {
+        $users = new UserModel();
+
+        $admin = $users->join('auth_groups_users', 'auth_groups_users.user_id = users.id')
+                       ->where('auth_groups_users.group', 'admin')
+                       ->findAll();
+        
+
+        $data = [
+            'title' => 'Help | SGCommunity',
+            'admin' => $admin,
+        ];
+        return view('users/help/kontak', $data);
     }
 
     

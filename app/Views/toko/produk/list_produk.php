@@ -28,18 +28,23 @@
                                 <?= $row['nama_produk']; ?>
                             </td>
                             <td>
-                                <?= $row['harga_produk']; ?>
+                                <?= 'Rp ' . number_format($row['harga_produk'], 0, ',', '.'); ?>
                             </td>
                             <td>
                                 <?= $row['stok_produk']; ?>
                             </td>
                             <td>
-                                <img src="<?= base_url('img/produk/' . $row['foto_produk']); ?>" alt="<?= $row['nama_produk']; ?>" class="img-thumbnail" style="width: 128px; height: 128px; object-fit: cover;">
+                                <img src="<?= base_url('img/produk/' . $row['foto_produk']); ?>"
+                                    alt="<?= $row['nama_produk']; ?>" class="img-thumbnail"
+                                    style="width: 128px; height: 128px; object-fit: cover;">
                             </td>
                             <td>
-                                <a class="btn btn-info" href="<?= base_url('toko/detailProduk/' . $row['id_produk']); ?>">Detail</a> | 
+                                <a class="btn btn-info"
+                                    href="<?= base_url('toko/detailProduk/' . $row['id_produk']); ?>">Detail</a> |
                                 <a href="<?= base_url('toko/hapusProduk/' . $row['id_produk']); ?>" class="btn btn-danger"
-                                    onclick="return confirm('Anda yakin ingin menghapus produk ini?')">Delete</a>
+                                    <a href="<?= base_url('toko/hapusProduk/' . $row['id_produk']); ?>"
+                                    class="btn btn-danger"
+                                    onclick="confirmDelete(event, '<?= base_url('toko/hapusProduk/' . $row['id_produk']); ?>')">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -81,5 +86,25 @@
         });
     </script>
 <?php endif; ?>
+
+<script>
+    //make function confirm before delete data
+    function confirmDelete(event, url) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus Produk!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.location.href = url;
+            }
+        })
+    }
+</script>
 
 <?= $this->endSection(); ?>

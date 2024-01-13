@@ -29,6 +29,10 @@
                                 <input class="form-control" type="email" id="email" name="email"
                                     value="<?= $user->email ?>">
 
+                                <label for="nohp">No Telepon</label>
+                                <input class="form-control" type="text" id="nohp" name="nohp"
+                                    value="<?= $user->nohp ?>">
+
                                 <label for="password">Password (leave blank to keep the same)</label>
                                 <input class="form-control" type="password" id="password" name="password">
 

@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <!-- Harga Produk -->
-                    <label for="harga_produk">Harga Produk</label>
+                    <label for="harga_produk">Harga Produk (Rp)</label>
                     <input type="number" class="form-control" id="harga_produk" name="harga_produk">
                 </div>
                 <div class="form-group">
@@ -30,9 +30,12 @@
                     <!-- foto produk -->
                     <label for="foto_produk">Foto Produk</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="foto_produk" name="foto_produk">
+                        <input type="file" class="image-file-input" id="foto_produk" name="foto_produk" accept=".jpg, .jpeg, .png, .svg"
+                            onchange="previewImage(event)">
                         <label class="custom-file-label" for="foto_produk">Pilih Foto</label>
                     </div>
+                    <img id="preview" src="#" alt="Preview" style="display: none; max-width: 200px; margin-top: 10px;">
+
                 </div>
                 <div class="form-group">
                     <!-- deskripsi produk -->
@@ -41,6 +44,8 @@
                 </div>
                 <!-- Add more form fields if needed -->
                 <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="<?= base_url('toko/listProduk'); ?>" class="btn btn-secondary">Kembali</a>
+                
             </form>
         </div>
     </div>
@@ -78,5 +83,17 @@
         });
     </script>
 <?php endif; ?>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var preview = document.getElementById('preview');
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 
 <?= $this->endSection(); ?>
