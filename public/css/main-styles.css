@@ -56,6 +56,7 @@
 html {
     overflow: hidden;
     margin: 0;
+    scroll-behavior: '';
 }
 
 /* Navbar */
@@ -77,13 +78,19 @@ header {
     padding: 0.5rem 1rem;
 }
 
+.dropdown-menu {
+    min-width: 250px;
+}
+
 .img-user {
     width: 45%;
     height: auto;
 }
 
-.action-btn {
-    border: var(--color-nav-80) 2px solid;
+.action-btn, .notification {
+    border-right: var(--color-nav-80) 2px solid;
+    border-bottom: var(--color-nav-80) 2px solid;
+    border-left: var(--color-nav-80) 2px solid;
 }
 
 .action-btn a:hover, 
@@ -95,6 +102,10 @@ header {
 .dropdown-item a {
     text-decoration: none;
 }
+
+.dropdown-item .notifDate {
+    font-size: 0.7rem;
+}  
 
 /* Content */
 .sidebar {

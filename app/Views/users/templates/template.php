@@ -42,6 +42,44 @@
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
+            <!-- Nav Item - Notification -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link drowdown-toggle show" href="" id="notificationDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-bell fa-shake text-white"></i>
+                    <span class="badge badge-danger badge-counter">3+</span>
+                </a>
+
+                <!-- Dropdown - Notification -->
+                <div class="notification dropdown-menu bg-night animated--grow-in py-0" aria-labelledby="notificationDropdown">
+                    <div class="container-fluid justify-content-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class="text-center text-white mt-2">Notification</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-item bg-white p-1 border-bottom">
+                        <div class="row">
+                            <a href="#" class="text-dark" role="button">
+                                <p class="text-black fw-bold my-0">Ini pengumuman</p>
+                                <p class="text-black my-0">Ini konten pengumumannya</p>
+                                <p class="notifDate text-secondary text-end fw-lighter my-0">10-01-2024</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="dropdown-item bg-white p-1">
+                        <div class="row">
+                            <a href="#" class="text-dark" role="button">
+                                <p class="text-black fw-bold my-0">Ini pengumuman</p>
+                                <p class="text-black my-0">Ini konten pengumumannya</p>
+                                <p class="notifDate text-secondary text-end fw-lighter my-0">10-01-2024</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle show" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
