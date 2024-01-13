@@ -21,7 +21,7 @@
                         <a href="<?= base_url('index.php'); ?>?id_toko=<?= $toko['id_toko']; ?>" role="button" class="toggleCard">
                             <div class="row g-0">
                                 <div class="card-img col-4">
-                                    <img src="<?= base_url(); ?>/img/<?= $toko['foto']; ?>" alt="image toko">
+                                    <img src="<?= base_url(); ?>/img/toko/<?= $toko['foto']; ?>" alt="image toko">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -66,12 +66,12 @@
                                     <div class="card border border-dark">
                                         <div class="row">
                                             <div class="card-img col-4">
-                                                <img src="<?= base_url(); ?>/img/<?= $product['foto_produk']; ?>" alt="image produk">
+                                                <img src="<?= base_url(); ?>/img/produk/<?= $product['foto_produk']; ?>" alt="image produk"> 
                                             </div> <!-- /.card-img -->
                                             <div class="card-body col-8">
                                                 <h5 class="card-title"><?= $product['nama_produk']; ?></h5>
                                                 <p class="card-text"><?= $product['tersedia'] ? 'Tersedia' : 'Stok Habis'; ?></p>
-                                                <p class="card-text lh-sm">Rp. <?= $product['harga_produk']; ?>.000</p>
+                                                <p class="card-text lh-sm">Rp. <?= $product['harga_produk']; ?></p>
                                             </div> <!-- /.card-body -->
                                         </div> <!-- /.row -->
                                     </div> <!-- /.card -->
