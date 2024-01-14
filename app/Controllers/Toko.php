@@ -134,9 +134,8 @@ class Toko extends BaseController
         $toko = new TokoModel();
         $toko = $toko->getTokoByUserId($user->id);
 
-        $iduser = $user->id;
-        if ($toko === null || $toko->checkToko($iduser) == false) {
-            return redirect()->to('dashboard')->with('error', 'Anda Belum Memiliki Toko, silahkan hubungi admin untuk membuatkan toko.');
+        if ($toko == null) {
+            return redirect()->to('dashboard')->with('error', 'Anda Belum Memiliki Toko, silahkan hubungi admin untuk membuatkan toko');
         }
 
         $idToko = $toko['id_toko'];
