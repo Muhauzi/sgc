@@ -30,6 +30,7 @@
                             <input class="form-control" type="file" id="foto" name="foto">
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
+                        | <a href="/admin/info" class="btn btn-danger">Kembali</a>
                     </form>
                 </div>
             </div>
