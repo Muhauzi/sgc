@@ -23,6 +23,12 @@
                         name="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>">
                 </div>
 
+                <div class="form-group">
+                    <input type="text"
+                        class="form-control form-control-user <?php if (session('errors.nohp')): ?>is-invalid<?php endif ?>"
+                        name="nohp" placeholder="No Telepon" value="<?= old('nohp') ?>">
+                </div>
+
                 
                 <!-- New input for user group -->
                 <div class="form-group">

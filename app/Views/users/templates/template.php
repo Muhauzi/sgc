@@ -41,6 +41,20 @@
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
+            <!-- navbar informasi -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('user/info'); ?>">
+                    <i class="fas fa-info-circle text-white"></i>
+                    <span class="text-white">Berita</span></a>
+            </li>
+            <!-- navbar toko -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('user/'); ?>">
+                    <i class="fas fa-store text-white "></i>
+                    <span class="text-white">Toko</span>
+                </a>
+            </li>
+
 
             <!-- Nav Item - Notification -->
             <li class="nav-item dropdown no-arrow">

@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <!-- Harga Produk -->
-                            <label for="harga_produk">Harga Produk</label>
+                            <label for="harga_produk">Harga Produk (Rp) </label>
                             <input type="number" class="form-control" id="harga_produk" name="harga_produk"
                                 value="<?= $produk['harga_produk']; ?>">
                         </div>

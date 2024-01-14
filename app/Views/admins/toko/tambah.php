@@ -30,7 +30,9 @@
                     <label for="owner">Owner</label>
                     <select name="owner" id="owner" class="form-control form-control-select">
                         <?php foreach ($users as $user): ?>
-                            <option value="<?= $user->id; ?>"><?= $user->fullname; ?></option>
+                            <?php if (in_array('pedagang', $user->groups)): ?>
+                                <option value="<?= $user->id; ?>"><?= $user->fullname; ?></option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>

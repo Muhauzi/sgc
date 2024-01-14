@@ -9,11 +9,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nama Produk</th>
-                        <th scope="col">Persediaan</th>
-                        <th scope="col">Harga</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" style="text-align: center;">#</th>
+                        <th scope="col" style="text-align: center;">Nama Produk</th>
+                        <th scope="col" style="text-align: center;">Persediaan</th>
+                        <th scope="col" style="text-align: center;">Harga</th>
+                        <th scope="col" style="text-align: center;">Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -32,7 +32,7 @@
                                 <?= $row->persediaan; ?>
                             </td>
                             <td>
-                                <?= $row->harga; ?>
+                                <?= number_format($row->harga, 0, ',', '.'); ?>
                             </td>
                             <td>
                                 <a class="btn btn-info" href="<?= base_url('admin/show/' . $row->id); ?>">Detail</a> | 

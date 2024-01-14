@@ -7,6 +7,9 @@ use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Models\UserModel;
 use CodeIgniter\Files\File;
 use App\Models\TokoModel;
+use App\Models\InfoModel;
+use CodeIgniter\I18n\Time;
+use CodeIgniter\HTTP\RequestInterface;
 
 class Admin extends BaseController
 {
@@ -59,34 +62,99 @@ class Admin extends BaseController
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
 
+
+
         $users = auth()->getProvider();
         $username = $this->request->getVar('username');
         $email = $this->request->getVar('email');
         $password = password_hash($this->request->getVar('password'), PASSWORD_BCRYPT); // **Hash the password before saving!**
+        $nohp = $this->request->getVar('nohp');
 
         $user = new User([
             'username' => $username,
             'email' => $email,
+            'nohp' => $nohp,
             'password' => $password,
             'user_image' => 'default.svg',
             'active' => 1
         ]);
+
+        // Validation rules
+        $rules = [
+            'username' => 'required|min_length[3]|max_length[20]|is_unique[users.username]',
+            'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[auth_identities.secret]',
+            'nohp' => 'required|min_length[10]|max_length[13]',
+            'password' => 'required|min_length[8]|max_length[255]',
+            'password_confirm' => 'matches[password]'
+        ];
+        $messages = [
+            'username' => [
+                'is_unique' => 'Username sudah digunakan'
+            ],
+            'email' => [
+                'is_unique' => 'Email sudah digunakan'
+            ],
+            'password' => [
+                'required' => 'Password tidak boleh kosong'
+            ],
+            'nohp' => [
+                'required' => 'No HP tidak boleh kosong'
+            ],
+            'password_confirm' => [
+                'matches' => 'Password tidak sama'
+            ]
+        ];
+
+        // Run validation
+        if (!$this->validate($rules, $messages)) {
+            // Redirect back with error message
+            if ($this->validator->hasError('username')) {
+                return redirect()->back()->withInput()->with('error', $this->validator->getError('username'));
+            } elseif ($this->validator->hasError('email')) {
+                return redirect()->back()->withInput()->with('error', $this->validator->getError('email'));
+            } elseif ($this->validator->hasError('password')) {
+                return redirect()->back()->withInput()->with('error', $this->validator->getError('password'));
+            } elseif ($this->validator->hasError('password_confirm')) {
+                return redirect()->back()->withInput()->with('error', $this->validator->getError('password_confirm'));
+            } elseif ($this->validator->hasError('nohp')) {
+                return redirect()->back()->withInput()->with('error', $this->validator->getError('nohp'));
+            }
+        }
+
         $users->save($user);
 
         // To get the complete user object with ID, we need to get from the database
         $user = $users->findById($users->getInsertID());
 
-        // Check if user is created successfully
-        if (!$user) {
-            return redirect()->to('/admin')->with('error', 'Failed to create user');
-        }
-
         // Save auth_groups_users
         $group_id = $this->request->getVar('role');
+        //group_id validation
+        $rulesgroup = [
+            'role' => 'required'
+        ];
+
+        $messagesgroup = [
+            'role' => [
+                'required' => 'Role tidak boleh kosong'
+            ]
+        ];
+
+        if (!$this->validate($rulesgroup, $messagesgroup)) {
+            // Redirect back with error message
+            if ($this->validator->hasError('role')) {
+                return redirect()->back()->withInput()->with('error', $this->validator->getError('role'));
+            }
+        }
+
         if ($group_id !== null) {
             $user->addGroup($group_id);
         } else {
             $user->addGroup('user');
+        }
+
+        // Check if user is created successfully
+        if (!$user) {
+            return redirect()->to('/admin')->with('error', 'Failed to create user');
         }
 
 
@@ -149,14 +217,18 @@ class Admin extends BaseController
         if (!auth()->user()->can('users.edit')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
+
         $id = $this->request->getVar('id');
         $username = $this->request->getVar('username');
         $fullname = $this->request->getVar('fullname');
         $email = $this->request->getVar('email');
         $role = $this->request->getVar('role');
+        $nohp = $this->request->getVar('nohp');
         $users = auth()->getProvider();
 
         $user = $users->findById($id);
+
+
 
         // Handle the file upload
         $file = $this->request->getFile('user_image');
@@ -186,13 +258,26 @@ class Admin extends BaseController
         $user->fill([
             'username' => $username,
             'fullname' => $fullname,
+            'nohp' => $nohp,
             'email' => $email,
             'user_image' => $user_image,
             'password' => $password,
             'group' => $role
         ]);
 
+        $groupbefore = $user->getGroups();
+        // Update user group
+        if (is_array($groupbefore)) {
+            foreach ($groupbefore as $group) {
+                $user->removeGroup($group);
+            }
+        } else {
+            $user->removeGroup($groupbefore);
+        }
+        $user->addGroup($role);
         $users->save($user);
+
+
         session()->setFlashdata('success', 'Data Berhasil Diubah');
         return redirect()->to('/admin');
     }
@@ -204,6 +289,10 @@ class Admin extends BaseController
         }
         $users = new UserModel();
         $user = $users->find($id);
+        $loggedInUserId = Auth()->user()->id;
+        if ($user->id === $loggedInUserId) {
+            return redirect()->to('/admin')->with('error', 'You cannot delete yourself');
+        }
 
         if ($user) {
             $users->delete($id);
@@ -249,7 +338,7 @@ class Admin extends BaseController
 
     public function tambah_toko()
     {
-        
+
         if (!auth()->user()->can('users.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
@@ -265,14 +354,14 @@ class Admin extends BaseController
 
         // Run validation
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('error', 'Salah bang');
+            return redirect()->back()->withInput()->with('error', 'Field Tidak Boleh Kosong');
         }
 
         // Get the input data from the form
         $namaToko = $this->request->getVar('nama_toko');
         $alamatToko = $this->request->getVar('alamat_toko');
         $teleponToko = $this->request->getVar('telepon_toko');
-        $idUser = $this->request->getVar('owner'); 
+        $idUser = $this->request->getVar('owner');
 
         // Create a new toko record
         $tokoData = [
@@ -283,7 +372,7 @@ class Admin extends BaseController
         ];
         $tokoModel->insert($tokoData);
         // d($tokoData);
-        
+
 
         session()->setFlashdata('success', 'Toko berhasil ditambahkan');
         return redirect()->to('/admin/toko');
@@ -296,7 +385,7 @@ class Admin extends BaseController
         }
         $tokoModel = new TokoModel();
         $toko = $tokoModel->find($id);
-        
+
         $usersm = new UserModel();
         $users = $usersm->findAll();
 
@@ -313,7 +402,8 @@ class Admin extends BaseController
         }
     }
 
-    public function perbarui_toko(){
+    public function perbarui_toko()
+    {
         if (!auth()->user()->can('users.edit')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
@@ -398,5 +488,195 @@ class Admin extends BaseController
         }
     }
 
+    //info section
+    public function info()
+    {
+        if (!auth()->user()->can('admin.access')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->findAll();
 
+        $data = [
+            'title' => 'Info | SGCommunity',
+            'informasi' => $info
+        ];
+
+        return view('admins/informasi/index', $data);
+    }
+
+    public function tambahkan_info()
+    {
+        if (!auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $data = [
+            'title' => 'Tambahkan Info | SGCommunity'
+        ];
+        return view('admins/informasi/tambah', $data);
+    }
+
+    public function tambah_info()
+    {
+        if (!auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+
+        // Validation rules
+        $rules = [
+            'judul' => 'required|min_length[3]|max_length[100]',
+            'isi' => 'required|min_length[3]'
+        ];
+
+
+
+        // Get the input data from the form
+        $judul = $this->request->getVar('judul');
+        $isi = $this->request->getVar('isi');
+        $penulis = $this->request->getVar('penulis');
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date('Y-m-d H:i:s');
+
+
+
+        // Run validation
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', 'Field Tidak Boleh Kosong');
+        }
+
+        // Handle the file upload
+        $file = $this->request->getFile('foto');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $randomNumber = rand(0, 16777215);
+            $newName = dechex($randomNumber) . '.' . $file->getExtension();
+            $gambar = 'info-' . $newName;
+            $file->move(ROOTPATH . 'img/info', $gambar);
+        } else {
+            $gambar = 'info.png'; // keep the old image if no new image is uploaded
+        }
+
+        // Create a new toko record
+        $infoData = [
+            'judul' => $judul,
+            'isi' => $isi,
+            'foto' => $gambar,
+            'tanggal' => $tanggal,
+            'penulis' => $penulis
+        ];
+        $infoModel->insert($infoData);
+
+
+        return redirect()->to('/admin/info')->with('success', 'Informasi Berhasil Ditambahkan');
+
+    }
+
+    public function edit_info($id)
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->find($id);
+
+        if ($info) {
+            $data = [
+                'title' => 'Edit Info | SGCommunity',
+                'informasi' => $info
+            ];
+            return view('admins/informasi/edit', $data);
+        }
+    }
+
+
+
+    public function perbarui_info()
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $id = $this->request->getVar('id_informasi');
+        $judul = $this->request->getVar('judul');
+        $isi = $this->request->getVar('isi');
+        $penulis = $this->request->getVar('penulis');
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date('Y-m-d H:i:s');
+
+        //validation
+        $rules = [
+            'judul' => 'required|min_length[3]|max_length[100]',
+            'isi' => 'required|min_length[3]',
+            'penulis' => 'required',
+        ];
+
+        $infoModel = new InfoModel();
+
+        $info = $infoModel->find($id);
+
+        // Handle the file upload
+        $file = $this->request->getFile('foto');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $randomNumber = rand(0, 16777215);
+            $newName = dechex($randomNumber) . '.' . $file->getExtension();
+            $foto = 'info-' . $newName;
+            $file->move('./img/info/', $foto);
+
+            // Delete previous user_image
+            $previousImage = $info['foto'];
+            if ($previousImage && file_exists('./img/info/' . $previousImage)) {
+                unlink('./img/info/' . $previousImage);
+            } else {
+                $foto = $info['foto']; // keep the old image if no new image is uploaded
+            }
+        }
+
+        // save updated data
+        $info = [
+            'judul' => $judul,
+            'isi' => $isi,
+            'foto' => $foto,
+            'tanggal' => $tanggal,
+            'penulis' => $penulis
+        ];
+        $infoModel->update($id, $info);
+
+
+        session()->setFlashdata('success', 'Data Berhasil Diubah');
+        return redirect()->to('/admin/info');
+    }
+
+    public function delete_info($id)
+    {
+        if (!auth()->user()->can('users.delete')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->find($id);
+
+        if ($info) {
+            $infoModel->delete($id);
+            return redirect()->to('/admin/info')->with('success', 'Info berhasil dihapus');
+        } else {
+            return redirect()->to('/admin/info')->with('error', 'Info tidak ditemukan');
+        }
+    }
+
+    public function detail_info($id)
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->find($id);
+
+        if ($info) {
+            $data = [
+                'title' => 'Detail Info | SGCommunity',
+                'informasi' => $info
+            ];
+            return view('admins/informasi/detail', $data);
+        } else {
+            return redirect()->to('/admin/informasi/detail')->with('error', 'Info tidak ditemukan');
+        }
+    }
 }

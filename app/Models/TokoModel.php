@@ -57,5 +57,9 @@
 
             return $this->update($idToko, $data);
         }
+
+        public function checkToko($idUser) {
+            return $this->where(['user_id' => $idUser])->first();
+        }
     }
 ?>

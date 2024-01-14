@@ -22,8 +22,13 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/toko'); ?>">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-store"></i>
                 <span>Menu Toko</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('admin/info'); ?>">
+                <i class="fas fa-info"></i>
+                <span>Menu Informasi</span></a>
         </li>
         <hr class="sidebar-divider">
     <?php endif; ?>
@@ -67,6 +72,17 @@
                 <span>Kelola Produk</span></a>
         </li>
     <?php endif; ?>
+    <hr class="sidebar-divider">
+
+    <li class="nav-item mx-3 text-white">
+        <i class="fas fa-cirle-user"></i>
+        <span><b>Help</b></span>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('user/help'); ?>">
+            <i class="fas fa-address-book"></i>
+            <span>Nomor Admin</span></a>
+
     <hr class="sidebar-divider">
 
     <li class="nav-item">

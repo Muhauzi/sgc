@@ -1,5 +1,5 @@
-<?= $this->extend('users/templates/template') ;?>
-<?= $this->section('content') ;?>
+<?= $this->extend('users/templates/template'); ?>
+<?= $this->section('content'); ?>
 
 <!-- Main -->
 <div class="main container-fluid px-0">
@@ -16,97 +16,132 @@
             <!-- Card List -->
             <div class="list-group list-group-flush border-bottom scrollarea">
                 <!-- Card -->
-                <?php foreach ($tokos as $toko): ?>
+                <?php foreach ($toko as $row): ?>
                     <div class="store card my-3 mx-4 border border-dark">
-                        <a href="<?= base_url('index.php'); ?>?id_toko=<?= $toko['id_toko']; ?>" role="button" class="toggleCard">
+                        <a href="<?= base_url('index.php'); ?>?id_toko=<?= $row['id_toko']; ?>" role="button"
+                            class="toggleCard">
                             <div class="row g-0">
                                 <div class="card-img col-4">
-                                    <img src="<?= base_url(); ?>/img/toko/<?= $toko['foto']; ?>" alt="image toko">
+                                    <img src="<?= base_url(); ?>/img/toko/<?= $row['foto']; ?>" alt="image toko">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $toko['nama_toko']; ?></h5>
-                                        <p class="card-text lh-sm">+62<?= $toko['nohp_toko']; ?></p>
-                                        <p class="card-text lh-sm"><?= $toko['alamat_toko']; ?></p>
+                                        <h5 class="card-title">
+                                            <?= $row['nama_toko']; ?>
+                                        </h5>
+                                        <p class="card-text lh-sm">
+                                            <?= $row['nohp_toko']; ?>
+                                        </p>
+                                        <p class="card-text lh-sm">
+                                            <?= $row['alamat_toko']; ?>
+                                        </p>
                                     </div> <!-- /.card-body -->
                                 </div> <!-- /.col-md-8 -->
                             </div> <!-- /.row -->
                         </a>
-                    </div>  <!-- /.card -->
+                    </div> <!-- /.card -->
                 <?php endforeach; ?>
 
-            </div>  <!-- /.list-group -->
-        </div>  <!-- /.sidebar -->
+            </div> <!-- /.list-group -->
+        </div> <!-- /.sidebar -->
 
         <!-- Content -->
         <main class="mx-auto col-8">
             <?php $id_toko = $_GET['id_toko'] ?? null; ?>
 
             <?php if (isset($id_toko)): ?>
-            <div class="container-fluid pt-3 pb-2 mb-3 overflow-y-auto" id="product">
-                <div class="column">
-                    <div class="col text-black">
-                        <h3 class="fw-bold">Daftar Produk</h3>
-                        <?php foreach ($tokos as $toko): ?>
-                            <?php if ($toko['id_toko'] === $id_toko): ?>
-                                <p>Berikut daftar produk Toko <?= $toko['nama_toko']; ?></p>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
+                <div class="container-fluid pt-3 pb-2 mb-3 overflow-y-auto" id="product">
 
-                    <!-- Product -->
-                    <div class="row justify-content-between mx-5">
-                        <?php 
-                        $hasProduct = false;
-                        foreach ($produks as $product): 
-                            if (isset($product['id_toko']) && $product['id_toko'] === $id_toko): 
-                                $hasProduct = true;
-                        ?>
-                                <div class="product col-6 mb-3">
-                                    <div class="card border border-dark">
-                                        <div class="row">
-                                            <div class="card-img col-4">
-                                                <img src="<?= base_url(); ?>/img/produk/<?= $product['foto_produk']; ?>" alt="image produk"> 
-                                            </div> <!-- /.card-img -->
-                                            <div class="card-body col-8">
-                                                <h5 class="card-title"><?= $product['nama_produk']; ?></h5>
-                                                <p class="card-text"><?= $product['tersedia'] ? 'Tersedia' : 'Stok Habis'; ?></p>
-                                                <p class="card-text lh-sm">Rp. <?= $product['harga_produk']; ?></p>
-                                            </div> <!-- /.card-body -->
-                                        </div> <!-- /.row -->
-                                    </div> <!-- /.card -->
-                                </div> <!-- /.product -->
-                        <?php 
-                        endif;
-                        endforeach; 
-                        if (!$hasProduct):
-                        ?>
-                            <p class="fw-bold text-black text-center">Toko ini tidak memiliki produk.</p>
+                    <?php foreach ($toko as $row): ?>
+                        <?php if ($row['id_toko'] === $id_toko): ?>
+                            <div class="card">
+                                <div class="row m-2">
+                                    <div class="card-img col-3">
+                                        <img src="<?= base_url(); ?>/img/toko/<?= $row['foto']; ?>" alt="foto toko"
+                                            class="card-img-top" style="object-fit: cover; width: 256px; height: 256px;">
+                                    </div> <!-- /.card-img -->
+                                    <div class="card-body col-8 mt-5">
+                                        <h3 class="card-title">
+                                            <?= $row['nama_toko']; ?>
+                                        </h3>
+                                        <hr>
+                                        <p>
+                                            <?= $row['deskripsi']; ?>
+                                        </p>
+                                        <p class="card-text lh-sm">Alamat : 
+                                            <?= $row['alamat_toko']; ?>
+                                        </p>
+                                        <p class="card-text lh-sm">No. HP : 
+                                            <?= $row['nohp_toko']; ?>
+                                    </div> <!-- /.card-body -->
+                                </div> <!-- /.row -->
+                                <hr>
+                                <div class="column">
+
+                                    <div class="col text-black mx-3 mt-3">
+                                        <h3 class="fw-bold">Daftar Produk</h3>
+                                        <?php foreach ($toko as $row): ?>
+                                            <?php if ($row['id_toko'] === $id_toko): ?>
+                                                <p>Berikut daftar produk Toko
+                                                    <?= $row['nama_toko']; ?>
+                                                </p>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+
+                                    <!-- Product -->
+                                    <div class="row justify-content-between mx-5">
+                                        <?php
+                                        $hasProduct = false;
+                                        foreach ($produks as $product):
+                                            if (isset($product['id_toko']) && $product['id_toko'] === $id_toko):
+                                                $hasProduct = true;
+                                                ?>
+                                                <div class="product col-6 mb-3">
+                                                    <div class="card border border-dark">
+                                                        <div class="row">
+                                                            <div class="card-img col-4">
+                                                                <img src="<?= base_url(); ?>/img/produk/<?= $product['foto_produk']; ?>"
+                                                                    alt="image produk">
+                                                            </div> <!-- /.card-img -->
+                                                            <div class="card-body col-8">
+                                                                <h5 class="card-title">
+                                                                    <?= $product['nama_produk']; ?>
+                                                                </h5>
+                                                                <span
+                                                                    class="badge <?= $product['tersedia'] == 1 ? 'badge-success' : 'badge-danger'; ?>">
+                                                                    <?= $product['tersedia'] == 1 ? 'Tersedia' : 'Stok Habis'; ?>
+                                                                </span>
+                                                                <p class="card-text lh-sm">Rp.
+                                                                    <?= number_format($product['harga_produk'], 0, ',', '.'); ?>
+                                                                </p>
+                                                                <hr>   
+                                                                <p class="card-text lh-sm">
+                                                                    <?= $product['deskripsi_produk']; ?>
+                                                            </div> <!-- /.card-body -->
+                                                        </div> <!-- /.row -->
+                                                    </div> <!-- /.card -->
+                                                </div> <!-- /.product -->
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div> <!-- /.row -->
+                                </div> <!-- /.column -->
+                            </div> <!-- /.card -->
                         <?php endif; ?>
-                    </div>
+                    <?php endforeach; ?>
 
-                </div> <!-- /.row -->
-            </div> <!-- /.container-fluid -->
 
-            <?php else: ?>
-            <!-- Greeting -->
-            <div class="content container-fluid d-flex justify-content-around flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3" id="content">
-                <div class="col-5">
-                    <div class="row">
-                        <h3 class="text-green">Halo, Selamat Datang!</h3>
-                        <h2 class="text-black fw-bold">Mau beli apa hari ini?</h2>
-                        <p class="text break">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas deserunt sed amet tenetur. Nostrum, esse.</p>
-                    </div> <!-- /.row -->
-                </div> <!-- /.col-lg-5 -->
-                <div class="col-5">
-                    <img src="<?= base_url(); ?>/img/logoSGC[1].png" alt="Logo SGC" class="img-logo img-fluid">
-                </div> <!-- /.col-lg-4 -->
-            </div> <!-- /.d-flex -->
+
+                </div> <!-- /.container-fluid -->
             <?php endif; ?>
-        </main> <!-- /.content -->
+
+        </main> <!-- /.mx-auto col-8 -->
 
     </div> <!-- /.row -->
 
+</div> <!-- /.main -->
+
+
 </div> <!-- /.container-fluid -->
 
-<?= $this->endSection() ;?>
+<?= $this->endSection(); ?>

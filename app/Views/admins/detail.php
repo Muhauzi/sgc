@@ -36,6 +36,12 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th scope="col">No Telepon</th>
+                                    <td>:</td>
+                                    <td>
+                                        <?= $user->nohp; ?>
+                                    </td>
+                                <tr>
                                     <th scope="col">Role</th>
                                     <td>:</td>
                                     <td><span class="badge badge-<?= ($name == 'admin') ? 'success' : 'warning' ?>">

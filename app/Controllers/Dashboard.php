@@ -27,9 +27,7 @@ class Dashboard extends BaseController
         $user = auth()->user();
         if ($user->inGroup('superadmin')) { // Use $this->in_groups() instead of in_groups()
             return view('admins/index', $data);
-        } elseif ($user->inGroup('pedagang')) { // Use $this->in_groups() instead of in_groups()
-            return redirect()->to('/toko');
-        } elseif ($user->inGroup('user')) { // Use $this->in_groups() instead of in_groups()
+        } else {
             return view('users/dashboard/profile', $data);
         }
     }
@@ -42,12 +40,12 @@ class Dashboard extends BaseController
         ];
         return view('users/dashboard/editprofile', $data);
     }
-        
+
 
     public function saveProfile()
     {
         $id = $this->request->getVar('id');
-        if (! user_id() == $id) {
+        if (!user_id() == $id) {
             return redirect()->back()->with('error', 'Tidak DApat Menyimpan Perubahan Profile');
         }
         $username = $this->request->getVar('username');

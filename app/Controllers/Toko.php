@@ -3,19 +3,33 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\Shield\Models\UserModel;
 use App\Models\TokoModel;
 use App\Models\ProdukModel;
+use CodeIgniter\Shield\Models\UserModel;
 
 class Toko extends BaseController
 {
+    private $validation;
+
+    public function __construct()
+    {
+        $this->validation = \Config\Services::validation();
+    }
     public function index()
     {
         if (!auth()->user()->can('profile.view')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
-        
+
+        // if user doesn't have id_toko
+
+
         $toko = new TokoModel();
+        $user = auth()->user();
+        $iduser = $user->id;
+        if ($toko->checkToko($iduser) == false) {
+            return redirect()->to('dashboard')->with('error', 'Anda Belum Memiliki Toko, silahkan hubungi admin untuk membuatkan toko');
+        }
         $user = auth()->user();
         $toko = $toko->getTokoByUserId($user->id);
         //if user is not a pedagang 
@@ -25,6 +39,7 @@ class Toko extends BaseController
         $idToko = $toko['id_toko'];
         $tokoModel = new TokoModel();
         $owner = $tokoModel->getTokoWithFullnameById($idToko);
+
         $data = [
             'title' => 'Toko | SGCommunity',
             'toko' => $toko,
@@ -40,9 +55,8 @@ class Toko extends BaseController
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
 
-        
 
-        $validation = \Config\Services::validation();
+
 
         $toko = new TokoModel();
         $user = auth()->user();
@@ -59,7 +73,7 @@ class Toko extends BaseController
             'toko' => $toko,
             'owner' => $owner,
             'user' => $user,
-            'validation' => $validation
+            'validation' => $this->validation
         ];
         return view('toko/edit_profile', $data);
     }
@@ -99,7 +113,7 @@ class Toko extends BaseController
             $fotoToko = $toko['foto'];
         }
 
-        if (! user_id() == $idU) {
+        if (!user_id() == $idU) {
             return redirect()->back()->with('error', 'Tidak DApat Menyimpan Perubahan Profile');
         }
 
@@ -119,6 +133,12 @@ class Toko extends BaseController
         $user = auth()->user();
         $toko = new TokoModel();
         $toko = $toko->getTokoByUserId($user->id);
+
+        $iduser = $user->id;
+        if ($toko === null || $toko->checkToko($iduser) == false) {
+            return redirect()->to('dashboard')->with('error', 'Anda Belum Memiliki Toko, silahkan hubungi admin untuk membuatkan toko.');
+        }
+
         $idToko = $toko['id_toko'];
         $produk = $produk->getProdukByTokoId($idToko);
         $data = [
@@ -135,7 +155,6 @@ class Toko extends BaseController
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
 
-        $validation = \Config\Services::validation();
 
         $produk = new ProdukModel();
         $user = auth()->user();
@@ -147,7 +166,7 @@ class Toko extends BaseController
             'title' => 'Ubah Produk | SGCommunity',
             'produk' => $produk,
             'user' => $user,
-            'validation' => $validation
+            'validation' => $this->validation
         ];
         return view('toko/produk/edit_produk', $data);
     }
@@ -159,7 +178,6 @@ class Toko extends BaseController
         if (!auth()->user()->can('produk.edit')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
-        $validation = \Config\Services::validation();
 
         $produk = new ProdukModel();
         $user = auth()->user();
@@ -188,11 +206,11 @@ class Toko extends BaseController
         $produkModel = new ProdukModel(); // Create an instance of the ProdukModel class
         $produkModel->updateProduk($id, $namaProduk, $foto_produk, $deskripsi_Produk, $harga_produk, $stok_produk, $tersedia, $idToko); // Call the updateProduk() method on the $produkModel instance
 
-        
+
 
         session()->setFlashdata('success', 'Produk Berhasil Diubah');
         return redirect()->to('/toko/listProduk');
-        
+
     }
 
     public function tambahProduk()
@@ -211,7 +229,21 @@ class Toko extends BaseController
         if (!auth()->user()->can('produk.create')) {
             return redirect()->back()->with('error', 'You do not have permissions to access that page.');
         }
-        $validation = \Config\Services::validation();
+
+        $this->validation->setRules([
+            'nama_produk' => 'required',
+            'harga_produk' => 'required|numeric',
+            'stok_produk' => 'required|numeric',
+            'deskripsi_produk' => 'required',
+            'foto_produk' => [
+                'max_size[foto_produk,1024]',
+                'is_image[foto_produk]',
+            ]
+        ]);
+
+        if (!$this->validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('error', 'Field tidak boleh kosong');
+        }
 
         $produk = new ProdukModel();
         $user = auth()->user();
@@ -239,7 +271,8 @@ class Toko extends BaseController
             'stok_produk' => $stokProduk,
             'deskripsi_produk' => $deskripsiProduk,
             'foto_produk' => $fotoProduk,
-            'id_toko' => $idToko
+            'id_toko' => $idToko,
+            'tersedia' => 1
         ]);
 
         session()->setFlashdata('success', 'Produk Berhasil Ditambahkan');

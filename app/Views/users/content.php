@@ -3,7 +3,7 @@
         <div class="col-5">
             <div class="row">
                 <h3 class="text-green">Halo, Selamat Datang!</h3>
-                <h2 class="text-black fw-bold">Mau beli apa hari ini?</h2>
+                <h2 class="text-black fw-bold">Selamat Datang di Website SGC Comunity</h2>
                 <p class="text break">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas deserunt sed amet tenetur. Nostrum, esse.</p>
             </div> <!-- /.row -->
         </div> <!-- /.col-lg-5 -->

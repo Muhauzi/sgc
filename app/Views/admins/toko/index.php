@@ -27,15 +27,17 @@
                             <td><?= $row['nama_toko']; ?></td>
                             <td><?= $row['fullname']; ?></td>
                             <td><?= $row['alamat_toko']; ?></td>
-                            <td>+62<?= $row['nohp_toko']; ?></td>
+                            <td><?= $row['nohp_toko']; ?></td>
                             <td class="">
                                 <a class="btn btn-info" href="<?= base_url('admin/detail_toko/' . $row['id_toko']); ?>">Detail</a> |
-                                <a href="<?= base_url('admin/delete_toko/' . $row['id']); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus toko ini?')">Delete</a>
+                                <a href="<?= base_url('admin/delete_toko/' . $row['id_toko']); ?>" class="btn btn-danger" onclick="confirmDelete(event, '<?= base_url('admin/delete_toko/' . $row['id_toko']); ?>')">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <!-- Js sweetalert2 section -->
             <?php if (session('success')): ?>
                 <script>
                     Swal.fire({
@@ -65,10 +67,29 @@
                     });
                 </script>
             <?php endif; ?>
+
+            <script>
+                //make function confirm before delete data
+                function confirmDelete(event, url) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Apakah anda yakin?',
+                        text: "Data yang dihapus tidak dapat dikembalikan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus toko!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.location.href = url;
+                        }
+                    })
+                }
+            </script>
         </div>
     </div>
 
 </div>
-<!-- /.container-fluid -->
 
 <?= $this->endSection(); ?>

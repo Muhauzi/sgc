@@ -37,7 +37,7 @@
                             <td>
                                 <a class="btn btn-info" href="<?= base_url('admin/show/' . $row->id); ?>">Detail</a> | 
                                 <a href="<?= base_url('admin/delete/' . $row->id); ?>" class="btn btn-danger"
-                                    onclick="return confirm('Anda yakin ingin menghapus pengguna ini?')">Delete</a>
+                                    onclick="confirmDelete(event, '<?= base_url('admin/delete/' . $row->id); ?>')">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -72,6 +72,26 @@
                     });
                 </script>
             <?php endif; ?>
+
+            <script>
+                //make function confirm before delete data
+                function confirmDelete(event, url) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Apakah anda yakin?',
+                        text: "Data yang dihapus tidak dapat dikembalikan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus user!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.location.href = url;
+                        }
+                    })
+                }
+            </script>
         </div>
     </div>
 
