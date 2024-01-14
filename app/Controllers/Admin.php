@@ -8,6 +8,8 @@ use CodeIgniter\Shield\Models\UserModel;
 use CodeIgniter\Files\File;
 use App\Models\TokoModel;
 use App\Models\InfoModel;
+use CodeIgniter\I18n\Time;
+use CodeIgniter\HTTP\RequestInterface;
 
 class Admin extends BaseController
 {
@@ -486,6 +488,195 @@ class Admin extends BaseController
         }
     }
 
+    //info section
+    public function info()
+    {
+        if (!auth()->user()->can('admin.access')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->findAll();
 
-}
+        $data = [
+            'title' => 'Info | SGCommunity',
+            'informasi' => $info
+        ];
+
+        return view('admins/informasi/index', $data);
+    }
+
+    public function tambahkan_info()
+    {
+        if (!auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $data = [
+            'title' => 'Tambahkan Info | SGCommunity'
+        ];
+        return view('admins/informasi/tambah', $data);
+    }
+
+    public function tambah_info()
+    {
+        if (!auth()->user()->can('users.create')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+
+        // Validation rules
+        $rules = [
+            'judul' => 'required|min_length[3]|max_length[100]',
+            'isi' => 'required|min_length[3]'
+        ];
+
+
+
+        // Get the input data from the form
+        $judul = $this->request->getVar('judul');
+        $isi = $this->request->getVar('isi');
+        $penulis = $this->request->getVar('penulis');
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date('Y-m-d H:i:s');
+
+
+
+        // Run validation
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', 'Field Tidak Boleh Kosong');
+        }
+
+        // Handle the file upload
+        $file = $this->request->getFile('foto');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $randomNumber = rand(0, 16777215);
+            $newName = dechex($randomNumber) . '.' . $file->getExtension();
+            $gambar = 'info-' . $newName;
+            $file->move(ROOTPATH . 'img/info', $gambar);
+        } else {
+            $gambar = 'info.png'; // keep the old image if no new image is uploaded
+        }
+
+        // Create a new toko record
+        $infoData = [
+            'judul' => $judul,
+            'isi' => $isi,
+            'foto' => $gambar,
+            'tanggal' => $tanggal,
+            'penulis' => $penulis
+        ];
+        $infoModel->insert($infoData);
+
+
+        return redirect()->to('/admin/info')->with('success', 'Informasi Berhasil Ditambahkan');
+
+    }
+
+    public function edit_info($id)
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->find($id);
+
+        if ($info) {
+            $data = [
+                'title' => 'Edit Info | SGCommunity',
+                'informasi' => $info
+            ];
+            return view('admins/informasi/edit', $data);
+        }
+    }
+
+
+
+    public function perbarui_info()
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $id = $this->request->getVar('id_informasi');
+        $judul = $this->request->getVar('judul');
+        $isi = $this->request->getVar('isi');
+        $penulis = $this->request->getVar('penulis');
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date('Y-m-d H:i:s');
+
+        //validation
+        $rules = [
+            'judul' => 'required|min_length[3]|max_length[100]',
+            'isi' => 'required|min_length[3]',
+            'penulis' => 'required',
+        ];
+
+        $infoModel = new InfoModel();
+
+        $info = $infoModel->find($id);
+
+        // Handle the file upload
+        $file = $this->request->getFile('foto');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $randomNumber = rand(0, 16777215);
+            $newName = dechex($randomNumber) . '.' . $file->getExtension();
+            $foto = 'info-' . $newName;
+            $file->move('./img/info/', $foto);
+
+            // Delete previous user_image
+            $previousImage = $info['foto'];
+            if ($previousImage && file_exists('./img/info/' . $previousImage)) {
+                unlink('./img/info/' . $previousImage);
+            } else {
+                $foto = $info['foto']; // keep the old image if no new image is uploaded
+            }
+        }
+
+        // save updated data
+        $info = [
+            'judul' => $judul,
+            'isi' => $isi,
+            'foto' => $foto,
+            'tanggal' => $tanggal,
+            'penulis' => $penulis
+        ];
+        $infoModel->update($id, $info);
+
+
+        session()->setFlashdata('success', 'Data Berhasil Diubah');
+        return redirect()->to('/admin/info');
+    }
+
+    public function delete_info($id)
+    {
+        if (!auth()->user()->can('users.delete')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->find($id);
+
+        if ($info) {
+            $infoModel->delete($id);
+            return redirect()->to('/admin/info')->with('success', 'Info berhasil dihapus');
+        } else {
+            return redirect()->to('/admin/info')->with('error', 'Info tidak ditemukan');
+        }
+    }
+
+    public function detail_info($id)
+    {
+        if (!auth()->user()->can('users.edit')) {
+            return redirect()->back()->with('error', 'You do not have permissions to access that page.');
+        }
+        $infoModel = new InfoModel();
+        $info = $infoModel->find($id);
+
+        if ($info) {
+            $data = [
+                'title' => 'Detail Info | SGCommunity',
+                'informasi' => $info
+            ];
+            return view('admins/informasi/detail', $data);
+        } else {
+            return redirect()->to('/admin/informasi/detail')->with('error', 'Info tidak ditemukan');
+        }
+    }
 }

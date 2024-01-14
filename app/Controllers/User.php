@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\Shield\Models\UserModel;
 use App\Models\TokoModel;
 use App\Models\ProdukModel;
+use App\Models\InfoModel;
 
 
 class User extends BaseController
@@ -117,6 +118,28 @@ class User extends BaseController
             'admin' => $admin,
         ];
         return view('users/help/kontak', $data);
+    }
+
+    public function info(){
+        $infoModel = new InfoModel();
+        $info = $infoModel->findAll();
+        $data = [
+            'title' => 'Info | SGCommunity',
+            'informasi' => $info
+        ];
+        return view('users/informasi/informasi', $data);
+    }
+
+    public function detailInfo($id_informasi){
+        $infoModel = new InfoModel();
+        $info = $infoModel->findAll();
+        $infoDetail = $infoModel->find($id_informasi);
+        $data = [
+            'title' => 'Info | SGCommunity',
+            'informasi' => $info,
+            'infoDetail' => $infoDetail
+        ];
+        return view('users/informasi/page', $data);
     }
 
     

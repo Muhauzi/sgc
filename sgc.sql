@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jan 2024 pada 19.16
+-- Waktu pembuatan: 13 Jan 2024 pada 15.45
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -73,12 +73,12 @@ CREATE TABLE `auth_identities` (
 --
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'email_password', 'admin', 'admin@sgc.com', '$2y$12$ZOA2jp5oiL9rT4vxne4imuIal2HY/e4MNSPQEwZ9Hb6rRfmZ1jj9i', NULL, NULL, 0, '2024-01-10 18:13:21', '2023-12-14 11:16:21', '2024-01-10 18:13:21'),
+(1, 1, 'email_password', 'admin', 'admin@sgc.com', '$2y$12$ZOA2jp5oiL9rT4vxne4imuIal2HY/e4MNSPQEwZ9Hb6rRfmZ1jj9i', NULL, NULL, 0, '2024-01-13 10:48:37', '2023-12-14 11:16:21', '2024-01-13 10:48:37'),
 (12, 18, 'email_password', 'penjual', 'penjual@sgc.com', '$2y$12$YcIpMPDJnVrRpkb8RoJhJODOeIcnZcMP/IRmgxL9XtM8pPkj1cBl.', NULL, NULL, 0, '2024-01-10 13:49:20', '2023-12-29 04:17:46', '2024-01-10 13:49:20'),
 (13, 19, 'email_password', 'user', 'customer@sgc.com', '$2y$12$9tuwffpU1vp3i7PEpFs2UOD2ZOt1pnXAGhA4089QT.as1ssAjdH5C', NULL, NULL, 0, '2024-01-03 09:15:55', '2023-12-29 04:24:08', '2024-01-03 09:15:55'),
 (15, 21, 'email_password', NULL, 'cek@gmail.com', '$2y$12$HtiyUPr9k1eFrKd6aK54Le.SbUkNoOJd6CRVBeOVaVJcJrq6KUlli', NULL, NULL, 0, NULL, '2024-01-04 05:56:42', '2024-01-04 05:56:43'),
 (17, 23, 'email_password', NULL, 'penjual3@email.com', '$2y$12$YcIpMPDJnVrRpkb8RoJhJODOeIcnZcMP/IRmgxL9XtM8pPkj1cBl.', NULL, NULL, 0, '2024-01-10 17:53:16', '2024-01-10 14:44:15', '2024-01-10 17:53:16'),
-(18, 24, 'email_password', NULL, 'penjual2@email.com', '$2y$12$Al3D/xDAmu75oOwuFNqq3O/ASP4qlhAoVoTaVnEc7WEFWM6oD4FLy', NULL, NULL, 0, '2024-01-10 17:53:03', '2024-01-10 14:45:18', '2024-01-10 17:53:03');
+(18, 24, 'email_password', NULL, 'penjual2@email.com', '$2y$12$Al3D/xDAmu75oOwuFNqq3O/ASP4qlhAoVoTaVnEc7WEFWM6oD4FLy', NULL, NULL, 0, '2024-01-13 11:25:24', '2024-01-10 14:45:18', '2024-01-13 11:25:24');
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,11 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identif
 (60, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'penjual2', NULL, '2024-01-10 17:52:59', 0),
 (61, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'penjual2', 24, '2024-01-10 17:53:03', 1),
 (62, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'penjual3', 23, '2024-01-10 17:53:16', 1),
-(63, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin', 1, '2024-01-10 18:13:21', 1);
+(63, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin', 1, '2024-01-10 18:13:21', 1),
+(64, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin', 1, '2024-01-10 18:17:39', 1),
+(65, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'admin', 1, '2024-01-13 10:48:37', 1),
+(66, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'penjual2', NULL, '2024-01-13 11:25:19', 0),
+(67, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'username', 'penjual2', 24, '2024-01-13 11:25:24', 1);
 
 -- --------------------------------------------------------
 
@@ -259,9 +263,11 @@ CREATE TABLE `produk_toko` (
 --
 
 INSERT INTO `produk_toko` (`id_produk`, `nama_produk`, `harga_produk`, `deskripsi_produk`, `foto_produk`, `stok_produk`, `tersedia`, `id_toko`) VALUES
-(2, 'Minyak Sunco 1L', 34000, 'Mahaaaalllllllllllllll', 'produk-1fc41a.jpg', '10', 1, 19),
+(2, 'Minyak Sunco 1L', 34000, 'Mahaaaalllllllllllllll', 'produk-1fc41a.jpg', '10', 0, 19),
 (3, 'Gulaku Gula Pasir 1Kg', 27000, 'Gulaa manissss', 'produk-2178b8.jpg', '13', 1, 19),
-(4, 'Seblak Mie Tulang', 12000, 'Seblak Mie dengan Mie Indomie, Tulang, telur dan Sayuran, Tersedia Toping Lain', 'default.png', '13', 0, 17);
+(4, 'Seblak Mie Tulang', 12000, 'Seblak Mie dengan Mie Indomie, Tulang, telur dan Sayuran, Tersedia Toping Lain', 'default.png', '13', 0, 17),
+(7, 'Telur 1Kg', 25000, 'Telur Ayam Negeri', 'produk-797366.webp', '14', 1, 19),
+(8, 'Garam Cap Layar 500gr', 15000, 'Garam Kualitas Terbaik', 'produk-afaab8.png', '13', 1, 19);
 
 -- --------------------------------------------------------
 
@@ -301,8 +307,6 @@ CREATE TABLE `toko` (
 --
 
 INSERT INTO `toko` (`id_toko`, `user_id`, `nama_toko`, `alamat_toko`, `nohp_toko`, `foto`, `deskripsi`) VALUES
-(6, 1, 'Gramedia SBG', 'Blok A1', '8123', 'default.svg', '  daweawd'),
-(8, 18, 'Kandita Super', 'Blok G9', '2147483647', 'unnamed.jpg', ''),
 (17, 23, 'Seblak Ganas', 'C12', '08216958452', 'default.svg', 'Nyiksa Perut? Gaskkan'),
 (19, 24, 'Sembako Murah 179', 'C19', '085155296228', 'toko-804ef2.jpg', 'Sembako Termurah dengan diskon besar');
 
@@ -331,12 +335,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `fullname`, `user_image`, `status`, `status_message`, `active`, `last_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin', 'Wawan', 'user-6587a083011e7.jpg', NULL, NULL, 1, '2024-01-10 18:14:26', '2023-12-14 11:16:20', '2023-12-24 04:48:47', NULL),
+(1, 'admin', 'Wawan', 'user-6587a083011e7.jpg', NULL, NULL, 1, '2024-01-13 11:25:13', '2023-12-14 11:16:20', '2023-12-24 04:48:47', NULL),
 (18, 'penjual', 'Rere', '', NULL, NULL, 1, '2024-01-10 14:36:49', '2023-12-29 04:17:46', '2023-12-29 04:17:46', NULL),
 (19, 'user', 'Dede', '', NULL, NULL, 1, '2024-01-03 09:16:41', '2023-12-29 04:24:08', '2023-12-29 04:24:08', NULL),
 (21, 'cek', NULL, 'default.svg', NULL, NULL, 1, NULL, '2024-01-04 05:56:42', '2024-01-10 13:49:06', '2024-01-10 13:49:06'),
 (23, 'penjual3', 'Leonidas', 'default.svg', NULL, NULL, 1, '2024-01-10 18:11:46', '2024-01-10 14:44:15', '2024-01-10 17:53:31', NULL),
-(24, 'penjual2', 'Amin Suprata', '1704901921_1b7e32f919437ac186f0.jpg', NULL, NULL, 1, '2024-01-10 17:53:07', '2024-01-10 14:45:18', '2024-01-10 15:52:01', NULL);
+(24, 'penjual2', 'Amin Suprata', '1704901921_1b7e32f919437ac186f0.jpg', NULL, NULL, 1, '2024-01-13 14:44:19', '2024-01-10 14:45:18', '2024-01-10 15:52:01', NULL);
 
 --
 -- Indexes for dumped tables
@@ -441,7 +445,7 @@ ALTER TABLE `auth_identities`
 -- AUTO_INCREMENT untuk tabel `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT untuk tabel `auth_permissions_users`
@@ -471,7 +475,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `produk_toko`
 --
 ALTER TABLE `produk_toko`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `settings`
@@ -483,7 +487,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT untuk tabel `toko`
 --
 ALTER TABLE `toko`
-  MODIFY `id_toko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_toko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

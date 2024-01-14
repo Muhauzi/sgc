@@ -22,12 +22,12 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/toko'); ?>">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-store"></i>
                 <span>Menu Toko</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/info'); ?>">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-info"></i>
                 <span>Menu Informasi</span></a>
         </li>
         <hr class="sidebar-divider">
